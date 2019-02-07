@@ -1,4 +1,4 @@
-import Home from './src/Components/Home'
+import {connect, Provider} from 'react-redux'
 import UserProfile from './src/Components/UserProfile'
 import {createStackNavigator, createAppContainer, defaultNavigationOptions} from 'react-navigation';
 
@@ -6,17 +6,28 @@ import {createStackNavigator, createAppContainer, defaultNavigationOptions} from
 
 const MainNavigator = createStackNavigator(
 {  
-    Home: {screen: Home},
+    
     UserProfile: {screen: UserProfile},
 },
 {
   initialRouteName: 'UserProfile', //change once Home is built
-  defaultNavigationOptions: {
-    header: null,
-  }
+  // defaultNavigationOptions: {
+  //   header: null,
+  // }
 }
 )
 
 const App = createAppContainer(MainNavigator)
 
-export default App
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    user}, dispatch)
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -1,7 +1,7 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
-import {user} from './reducers/user'
+import {user} from './reducers/users'
 
 const reducers = user //combine later
 
