@@ -50,7 +50,9 @@ const styles = StyleSheet.create({
   },
 
 
-
+  userCardScroll: {
+    height: '50%'
+  },
 
   profileInner: {
     alignSelf: 'center',
