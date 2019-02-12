@@ -4,13 +4,13 @@ import styles from '../styles'
 
 
 function UserCard(props) {
-   const {imgUrl} = props.user
+   const {img_url} = props.user
   return (
 
     <View style={styles.profileInner}>    
       <Image
         style={styles.profilePic}
-        source={{uri: imgUrl}}
+        source={{uri: img_url}}
         />
 
       <Text style={styles.profileTextName}>{props.user.username}</Text>

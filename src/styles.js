@@ -94,8 +94,11 @@ const styles = StyleSheet.create({
 
 
   playBar: {
+    backgroundColor: 'white',
+    alignItems: 'center',
+    height: 65,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     marginTop: 10
   }
 

@@ -14,32 +14,37 @@ export default class UserProfile extends React.Component {
     super(props)
 
     this.state= {
-      userId: 6,   //dummy user login
-      currentUser: {}
+      userId: 5,   //dummy user login
+      currentUser: {},
+      recents: []
     }
   }
 
   componentWillMount = () => {
-    if (!this.state.currentUser.username) this.getUser(1) 
+    this.nextUser()
   }
 
-  getUser = (id) => {
-    // axios.get(`http://TMA-2-Iapetus:3000/users/1`) //this doesn't work.
-    // axios.get(`http://192.168.122.1:3000/users/1`)
-     axios.get(`${BASE_URL}/users/${id}`)
+  // getUser = (id) => {
+  //    axios.get(`${BASE_URL}/users/${id}`)
+  //   .then(response => {
+  //     this.setState({currentUser: response.data[0]})
+  //   })
+  //   .catch(() => console.log(`could not get user`))
+  // }
+
+  nextUser = () =>  { //find next user to show while browsing
+    axios.get(`${BASE_URL}/users/next/${this.state.userId}`)
     .then(response => {
-      this.setState({currentUser: response.data[0]})
+        this.setState({currentUser: response.data})
     })
-    .catch(() => console.log(`could not get user`))
+    .catch(() => console.log('failed to get next user'))
   }
 
-  nextUser = () =>  {
-    this.getUser(this.state.currentUser.id + 1)
+  judgeUser = (judgedId, status) => {
+    axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: judgedId, status: status})
+    .then(this.nextUser())
+    .catch(() => console.log('failed to play user'))
   }
-
-
-
-  //function to randomly pick matching user
 
   render() {
 
@@ -47,7 +52,7 @@ export default class UserProfile extends React.Component {
     return (
       <ImageBackground source={require('../guitars/IMG_20190208_065249773_HDR.jpg')} style={styles.imgBG}>
         <View style={styles.profileBG}>
-          {/* Maybe this inner view is a separate card component? */}
+ 
 
           <ScrollView style={styles.userCardScroll}>
             <UserCard
@@ -59,9 +64,10 @@ export default class UserProfile extends React.Component {
         
         <PlayBar
           user={this.state.currentUser}
-          getUser={this.getUser}
+          judgeUser={this.judgeUser}
           nextUser={this.nextUser}
         />
+      
     
         </View>
       </ImageBackground>
