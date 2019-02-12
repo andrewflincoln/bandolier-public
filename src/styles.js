@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: '#FFE4A0',
     width: '90%',
-    marginTop: 40,
+    marginTop: 5,
     borderRadius: 15,
     padding: 20,
   },
@@ -100,7 +100,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: 10
+  }, 
+
+  navBar: {
+    backgroundColor: 'black',
+    alignItems: 'flex-end',
+    height: 75,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 8
+  },
+  navBarFont: {
+    alignSelf: 'center',
+    color: 'white',
+    fontSize: 8
   }
+  // navBarInner: {
+  //   alignItems: 'center',
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-around',
+  //   marginTop: 15
+  // }
+
 
 
 });

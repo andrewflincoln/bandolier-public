@@ -4,9 +4,12 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 import axios from 'axios'
 import styles from '../styles'
-import {SecureStore} from 'expo'
 import UserCard from './UserCard'
 import PlayBar from './PlayBar'
+import NavBar from './NavBar'
+
+
+
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 export default class UserProfile extends React.Component {
@@ -48,10 +51,14 @@ export default class UserProfile extends React.Component {
 
   render() {
 
+
     const {navigate} = this.props.navigation
     return (
       <ImageBackground source={require('../guitars/IMG_20190208_065249773_HDR.jpg')} style={styles.imgBG}>
         <View style={styles.profileBG}>
+          <NavBar
+            userId={this.state.userId}
+          />
  
 
           <ScrollView style={styles.userCardScroll}>
