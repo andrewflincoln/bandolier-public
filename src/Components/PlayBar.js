@@ -9,10 +9,10 @@ function PlayBar(props) {
   return (
    
     <View style={styles.playBar}>
-      <TouchableOpacity onPress={() => props.judgeUser(props.user.id, 'stop')}>
+      <TouchableOpacity onPress={() => props.judgeUser(props.user.id, 'stopped')}>
       <IconF color="black" name="stop" size={25} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => props.judgeUser(props.user.id, 'play')}>
+      <TouchableOpacity onPress={() => props.judgeUser(props.user.id, 'played')}>
         
         <IconF color="black" name="play" size={35} />
 

@@ -3,7 +3,7 @@ import { StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   profileBG: {
-    backgroundColor: '#85E59A',
+    backgroundColor: '#8EE8B9',
     height: '100%',
     opacity: 0.7
 
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   loginBG: {
     justifyContent: 'center',
-    backgroundColor: '#85E59A',
+    backgroundColor: '#8EE8B9',
     height: '100%',
     opacity: 0.9,
     zIndex: 1
@@ -56,7 +56,8 @@ const styles = StyleSheet.create({
 
   profileInner: {
     alignSelf: 'center',
-    backgroundColor: '#FFE4A0',
+    // backgroundColor: '#FFE4A0',
+    backgroundColor: '#FFF9CC',
     width: '90%',
     marginTop: 5,
     borderRadius: 15,
@@ -114,14 +115,35 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     color: 'white',
     fontSize: 8
-  }
-  // navBarInner: {
-  //   alignItems: 'center',
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-around',
-  //   marginTop: 15
-  // }
+  },
 
+  playlistView: {
+    backgroundColor: '#8EE8B9',
+    height: '100%'
+  },
+  playlistRow: {
+    flexDirection: 'row',
+    height: 80,
+    width: '100%',
+    marginTop: 5,
+    marginLeft: 5,
+    backgroundColor: '#FFF9CC',
+    // backgroundColor: 'white',
+    borderRadius: 10
+   
+  },  
+  rowPic: {
+    width: '25%',
+    borderRadius: 10,
+    marginRight: 5,
+  },  
+  rowTextBox: {
+    flex: 1,
+    flexDirection: 'column'
+  },
+  rowTextName: {
+    fontWeight: 'bold'
+  }
 
 
 });

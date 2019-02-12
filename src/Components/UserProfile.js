@@ -17,7 +17,7 @@ export default class UserProfile extends React.Component {
     super(props)
 
     this.state= {
-      userId: 5,   //dummy user login
+      userId: 2,   //'',
       currentUser: {},
       recents: []
     }
@@ -27,13 +27,6 @@ export default class UserProfile extends React.Component {
     this.nextUser()
   }
 
-  // getUser = (id) => {
-  //    axios.get(`${BASE_URL}/users/${id}`)
-  //   .then(response => {
-  //     this.setState({currentUser: response.data[0]})
-  //   })
-  //   .catch(() => console.log(`could not get user`))
-  // }
 
   nextUser = () =>  { //find next user to show while browsing
     axios.get(`${BASE_URL}/users/next/${this.state.userId}`)
@@ -49,6 +42,10 @@ export default class UserProfile extends React.Component {
     .catch(() => console.log('failed to play user'))
   }
 
+  navPlaylist = () => {
+    this.props.navigation.navigate('Playlist')
+  }
+
   render() {
 
 
@@ -58,6 +55,7 @@ export default class UserProfile extends React.Component {
         <View style={styles.profileBG}>
           <NavBar
             userId={this.state.userId}
+            navPlaylist={this.navPlaylist}
           />
  
 
