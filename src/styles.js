@@ -48,42 +48,40 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginBottom: 10
   },
-
-
   userCardScroll: {
-    height: '50%'
+    height: '100%'
   },
 
+
+  //UserCard
   profileInner: {
     alignSelf: 'center',
-    // backgroundColor: '#FFE4A0',
     backgroundColor: '#FFF9CC',
     width: '90%',
     marginTop: 5,
-    borderRadius: 15,
-    padding: 20,
+    borderRadius: 10,
+    padding: 15,
+    // height: '100%'
   },
   profilePic: {
     height: 175,
   },
   profileTextBody: {
-
+    
+  },
+  profileTextName:{
+    fontSize: 23,
+    marginTop: 1,
+    fontWeight: 'bold',
   },
   profileTextSectionHead: {
     fontSize: 14,
     fontWeight: 'bold',
-    marginTop: 5
-  },
-  profileTextName:{
-    fontSize: 25,
-    marginTop: 10,
-    fontWeight: 'bold'
+    // marginTop: 2
   },
   profileTextDeal: {
-    // fontSize: 19,
+    // fontSize: 18,
     marginBottom: 2,
-    fontWeight: 'bold',
-
   },
   genreInstrSection: {
     flexDirection: 'row',
@@ -100,7 +98,7 @@ const styles = StyleSheet.create({
     height: 65,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 10
+    // marginTop: 10
   }, 
 
   navBar: {
@@ -143,7 +141,20 @@ const styles = StyleSheet.create({
   },
   rowTextName: {
     fontWeight: 'bold'
+  },
+
+  //Questions
+  questionCard: {
+    alignSelf: 'center',
+    backgroundColor: '#FFF9CC',
+    width: '90%',
+    marginTop: 5,
+    borderRadius: 10,
+    padding: 15,
   }
+
+
+
 
 
 });

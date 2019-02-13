@@ -3,6 +3,7 @@ import UserProfile from './src/Components/UserProfile'
 import Login from './src/Components/Login'
 import Playlist from './src/Components/Playlist'
 import NavBar from './src/Components/NavBar'
+import Questions from './src/Components/Questions'
 
 //don't forget to import that file you just made, conveniently right here
 
@@ -15,10 +16,11 @@ const MainNavigator = createStackNavigator(
     Login: {screen: Login},
     UserProfile: {screen: UserProfile},
     Playlist: {screen: Playlist},
-    NavBar: {screen: NavBar}
+    NavBar: {screen: NavBar},
+    Questions: {screen: Questions}
 },
 {
-  initialRouteName: 'Playlist', //change
+  initialRouteName: 'Questions', //change
   defaultNavigationOptions: {
     header: null,
   }

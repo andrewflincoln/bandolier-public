@@ -18,8 +18,7 @@ function UserCard(props) {
       {/* <Text style={styles.profileTextSectionHead}>Deal </Text> */}
       <Text style={styles.profileTextDeal}>{props.user.deal}</Text>
 
-      {/* <Text style={styles.profileTextSectionHead}>Bio</Text> */}
-      <Text>{props.user.bio}</Text>
+     
 
 
       <View style={styles.genreInstrSection}>
@@ -50,6 +49,10 @@ function UserCard(props) {
 
       <Text style={styles.profileTextSectionHead}>Influences </Text>
       <Text>{props.user.influences}</Text>
+
+      <Text style={styles.profileTextSectionHead}>Bio</Text>
+      <Text>{props.user.bio}</Text>
+
     </View>  
   )
 

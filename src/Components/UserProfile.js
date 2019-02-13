@@ -63,8 +63,6 @@ export default class UserProfile extends React.Component {
             <UserCard
               user={this.state.currentUser}
             />
-
-
           </ScrollView>
         
         <PlayBar

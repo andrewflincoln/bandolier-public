@@ -46,7 +46,6 @@ export default class Playlist extends React.Component {
           // userId = {props.userId}//check syntax
 
         />
-
         {
           this.state.listUsers.map(guy => 
             <PlaylistRow
@@ -55,13 +54,6 @@ export default class Playlist extends React.Component {
             />
           )
         }
-
-        <Button
-          title='refresh list'
-          onPress={this.getPlaylist}
-        />
-
-  
 
       </View>
     )
