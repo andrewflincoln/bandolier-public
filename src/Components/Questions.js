@@ -27,27 +27,52 @@ export default class Questions extends React.Component {
 
     fetch(`${BASE_URL}/questions/next/${this.state.userId}`)
     .then(response => response.json())
-    // .then((response) => console.log(response))
     .then(response => this.setState({currentQ: response}))
-    // axios.get(`${BASE_URL}/questions/next/${this.state.userId}`)
-    // .then(response => {
-    //     console.log(JSON.stringify(response))
-    //     this.setState({currentQ: response.data})
-    // })
-    // .catch(() => console.log('failed to get next q'))
+    .catch(() => console.log('failed to get next q'))
   }
 
  
-
+  // <View style={[(this.props.isTrue) ? styles.bgcolorBlack : styles.bgColorWhite]}>
   render() {
+    const q = this.state.currentQ
     return (
-      <View>
-
+      <View style={styles.questionsPage}>
+      <Navbar
+      />
 
         <View style={styles.questionCard}>
-          <Text>{this.state.currentQ.question_text}</Text>
+          <Text style={styles.questionText}>{q.question_text}</Text>
+        </View>
 
+        <TouchableOpacity onPress={() => this.setState({answer: 1})} 
+            style={[this.state.answer===1 ? styles.selectedAnswer : styles.optionCard]}>
+          <Text>{q.option_1}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.setState({answer: 2})} 
+            style={[this.state.answer===2 ? styles.selectedAnswer : styles.optionCard]}>
+          <Text>{q.option_2}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.setState({answer: 3})} 
+            style={[this.state.answer===3 ? styles.selectedAnswer : styles.optionCard]}>
+          <Text>{q.option_3}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.setState({answer: 4})} 
+            style={[this.state.answer===4 ? styles.selectedAnswer : styles.optionCard]}>
+          <Text>{q.option_4}</Text>
+        </TouchableOpacity>
 
+        <View style={styles.questionSubmitView}>  
+           <TouchableOpacity style={styles.questionSubmit}>
+             <Text style={styles.answerButtonText}>
+               Skip
+             </Text>
+           </TouchableOpacity>
+
+          <TouchableOpacity style={styles.questionSubmit}>
+            <Text style={styles.answerButtonText}>
+              Answer
+            </Text>
+          </TouchableOpacity>
         </View>
 
 

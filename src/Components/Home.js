@@ -8,11 +8,10 @@ import UserCard from './UserCard'
 import PlayBar from './PlayBar'
 import NavBar from './NavBar'
 
-
-
-
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
-export default class UserProfile extends React.Component {
+
+
+export default class Home extends React.Component {
   constructor(props) {
     super(props)
 
@@ -44,6 +43,9 @@ export default class UserProfile extends React.Component {
 
   navPlaylist = () => {
     this.props.navigation.navigate('Playlist')
+  }
+  navQuestions = () => {
+    this.props.navigation.navigate('Questions')
   }
 
   render() {
@@ -79,10 +81,6 @@ export default class UserProfile extends React.Component {
 
 
 }
-
-
-
-
 
 
 

@@ -6,6 +6,7 @@ import IconF from 'react-native-vector-icons/FontAwesome'
 import IconI from 'react-native-vector-icons/Ionicons'
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
 
+
 export default class NavBar extends React.Component {
   constructor(props) {
     super(props)
@@ -32,9 +33,7 @@ export default class NavBar extends React.Component {
             <Text style={styles.navBarFont}>Search</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={this.props.navExplore} //this is it. this works.
-          >
+          <TouchableOpacity onPress={this.props.navExplore}>
             <IconM color="white" name="radio" size={25} />
             <Text style={styles.navBarFont}>Explore</Text>
           </TouchableOpacity>

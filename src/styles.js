@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   profileBG: {
     backgroundColor: '#8EE8B9',
     height: '100%',
-    opacity: 0.7
+    opacity: 0.8
 
   }, 
   imgBG: {
@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
 
   navBar: {
     backgroundColor: 'black',
+    opacity: 0.7,
     alignItems: 'flex-end',
     height: 75,
     flexDirection: 'row',
@@ -144,13 +145,65 @@ const styles = StyleSheet.create({
   },
 
   //Questions
+  questionsPage: {
+    backgroundColor: '#8EE8B9',
+    height: '100%',
+  },
   questionCard: {
     alignSelf: 'center',
+    // backgroundColor: '#FFF9CC',
+    backgroundColor: 'white',
+    width: '90%',
+    marginTop: 60,
+    marginBottom: 10,
+    borderRadius: 8,
+    // borderColor: 'gray',
+    // borderWidth: 1,
+    padding: 15,
+  },
+  questionText: {
+    fontSize: 20
+  },
+  optionCard: {
+    alignSelf: 'center',
     backgroundColor: '#FFF9CC',
+    // backgroundColor: 'white',
     width: '90%',
     marginTop: 5,
-    borderRadius: 10,
+    borderRadius: 8,
     padding: 15,
+  },
+  selectedAnswer: {
+    alignSelf: 'center',
+    // backgroundColor: '#FFAF99',
+    backgroundColor: '#C4EDFF',
+    width: '93%',
+    marginTop: 5,
+    borderRadius: 8,
+    padding: 16,
+  },
+  questionSubmitView: {
+    marginTop: 12,
+    marginBottom: 10,
+    justifyContent: 'center',
+    flexDirection: 'row',
+ 
+  },
+  questionSubmit: {
+    alignContent: 'center',
+    justifyContent: 'center',
+    // backgroundColor: '#FFF9CC',
+    backgroundColor: 'white',
+    width: '35%',
+    borderRadius: 8,
+    padding: 10,
+    marginLeft: 5,
+    backgroundColor: 'gray'
+  },
+  answerButtonText: {
+    fontSize: 15,
+    color: 'white',
+    alignSelf: 'center'
   }
 
 

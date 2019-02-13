@@ -36,8 +36,6 @@ export default class Playlist extends React.Component {
   }
 
   render() {
-    
-    console.log('render state: ' + JSON.stringify(this.state.listUsers))
     const {navigate} = this.props.navigation
     return (
       <View style={styles.playlistView}>  
