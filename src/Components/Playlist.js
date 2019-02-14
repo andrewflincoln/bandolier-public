@@ -31,8 +31,11 @@ export default class Playlist extends React.Component {
     .then(response => this.setState({listUsers: response.rows}))
   }
 
-  navExplore = () => {//prop function for navbar
-    this.props.navigation.navigate('UserProfile')
+  navHome = () => {//prop function for navbar
+    this.props.navigation.navigate('Home')
+  }
+  navQuestions = () => {
+    this.props.navigation.navigate('Questions')
   }
 
   render() {
@@ -40,9 +43,9 @@ export default class Playlist extends React.Component {
     return (
       <View style={styles.playlistView}>  
         <NavBar
-          navExplore={this.navExplore}
-          // userId = {props.userId}//check syntax
-
+          navHome={this.navHome}
+          navQuestions={this.navQuestions}
+          userId = {this.state.userId}
         />
         {
           this.state.listUsers.map(guy => 

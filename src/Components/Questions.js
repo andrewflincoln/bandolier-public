@@ -2,9 +2,7 @@ import React from 'react'
 import {Text, View, TouchableOpacity} from 'react-native'
 import styles from '../styles'
 import axios from 'axios'
-import Navbar from './NavBar'
-
-
+import NavBar from './NavBar'
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
@@ -12,9 +10,9 @@ export default class Questions extends React.Component {
   constructor(props) {
     super(props)
     this.state={
-      userId: 6,
+      userId: 7,
       currentQ: {},
-      answer: '',
+      answer: 0,
     }
   }
 
@@ -22,23 +20,53 @@ export default class Questions extends React.Component {
     this.getNextQuestion()
   }
 
-  getNextQuestion = () =>  { 
-    console.log('starting Get Next Q')
+  // getNextQuestion = async () =>  { //sometimes getting a 304 error here (not on Postman)
+  //   fetch(`${BASE_URL}/questions/next/${this.state.userId}`)
+  //   .then(response => response.json())
+  //   .then(response => this.setState({currentQ: response}))
+  //   .then(() => this.setState({answer: 0}))
+  //   .catch(() => console.log('failed to get next q'))
 
-    fetch(`${BASE_URL}/questions/next/${this.state.userId}`)
-    .then(response => response.json())
-    .then(response => this.setState({currentQ: response}))
+  // }
+
+  getNextQuestion = () =>  { //sometimes getting a 304 error here (but not on Postman)
+    axios.get(`${BASE_URL}/questions/next/${this.state.userId}`)
+    .then(response => {
+        this.setState({currentQ: response.data})
+    })
+    .then(() => this.setState({answer: 0}))
+    
     .catch(() => console.log('failed to get next q'))
   }
 
- 
-  // <View style={[(this.props.isTrue) ? styles.bgcolorBlack : styles.bgColorWhite]}>
+  submitAnswer = () => { //this works flawlessly, including the invocation of the above function
+    axios.post(`${BASE_URL}/questions`, {userId: this.state.userId, questionId: this.state.currentQ.id, answer: this.state.answer})
+    .then(this.getNextQuestion())
+  }
+
+  navHome = () => {//prop function for navbar
+    this.props.navigation.navigate('Home')
+  }
+  navPlaylist = () => {
+    this.props.navigation.navigate('Playlist')
+  }
+  
+
+
   render() {
     const q = this.state.currentQ
     return (
+
+    
       <View style={styles.questionsPage}>
-      <Navbar
+
+      <NavBar
+        userId={this.state.userId}
+        navPlaylist={this.navPlaylist}
+        navHome={this.navHome}
+
       />
+
 
         <View style={styles.questionCard}>
           <Text style={styles.questionText}>{q.question_text}</Text>
@@ -62,13 +90,13 @@ export default class Questions extends React.Component {
         </TouchableOpacity>
 
         <View style={styles.questionSubmitView}>  
-           <TouchableOpacity style={styles.questionSubmit}>
+           <TouchableOpacity style={styles.questionSubmit} onPress={this.getNextQuestion}>
              <Text style={styles.answerButtonText}>
                Skip
              </Text>
            </TouchableOpacity>
 
-          <TouchableOpacity style={styles.questionSubmit}>
+          <TouchableOpacity style={styles.questionSubmit} onPress={this.submitAnswer}>
             <Text style={styles.answerButtonText}>
               Answer
             </Text>

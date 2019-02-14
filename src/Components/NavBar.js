@@ -33,7 +33,7 @@ export default class NavBar extends React.Component {
             <Text style={styles.navBarFont}>Search</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={this.props.navExplore}>
+          <TouchableOpacity onPress={this.props.navHome}>
             <IconM color="white" name="radio" size={25} />
             <Text style={styles.navBarFont}>Explore</Text>
           </TouchableOpacity>
@@ -48,7 +48,7 @@ export default class NavBar extends React.Component {
             <Text style={styles.navBarFont}>Contact</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.props.navQuestions}>
             <IconM color="white" name="comment-question" size={25} />
             <Text style={styles.navBarFont}>Quiz</Text>
           </TouchableOpacity>

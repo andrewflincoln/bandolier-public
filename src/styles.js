@@ -157,8 +157,8 @@ const styles = StyleSheet.create({
     marginTop: 60,
     marginBottom: 10,
     borderRadius: 8,
-    // borderColor: 'gray',
-    // borderWidth: 1,
+    borderColor: 'gray',
+    borderWidth: 1,
     padding: 15,
   },
   questionText: {
