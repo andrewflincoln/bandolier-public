@@ -7,20 +7,19 @@ function UserCard(props) {
    const {img_url} = props.user
   return (
 
-    <View style={styles.profileInner}>    
+    <View style={styles.profileInner}>  
       <Image
         style={styles.profilePic}
         source={{uri: img_url}}
         />
-
-      <Text style={styles.profileTextName}>{props.user.username}</Text>
-
+      <View style={styles.nameMatchBar}>
+        <Text style={styles.profileTextName}>{props.user.username}</Text>
+        <Text style={styles.profileTextName}>{props.user.match}</Text>
+      </View>
       {/* <Text style={styles.profileTextSectionHead}>Deal </Text> */}
       <Text style={styles.profileTextDeal}>{props.user.deal}</Text>
 
-     
-
-
+    
       <View style={styles.genreInstrSection}>
         <View>
           <Text style={styles.profileTextSectionHead}>Genres </Text>

@@ -33,6 +33,14 @@ export default class Home extends React.Component {
         this.setState({currentUser: response.data})
     })
     .catch(() => console.log('failed to get next user'))
+
+
+    axios.get(`${BASE_URL}/users/comp/${this.state.userId}/${this.state.currentUser.id}`)
+    .then(response => {
+        this.state.currentUser.match=response
+    })
+    .catch(() => console.log('failed to get next user'))
+
   }
 
   judgeUser = (judgedId, status) => {
@@ -65,6 +73,7 @@ export default class Home extends React.Component {
             <UserCard
               user={this.state.currentUser}
             />
+          
           </ScrollView>
         
         <PlayBar

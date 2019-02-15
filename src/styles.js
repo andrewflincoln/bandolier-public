@@ -66,6 +66,10 @@ const styles = StyleSheet.create({
   profilePic: {
     height: 175,
   },
+  nameMatchBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
   profileTextBody: {
     
   },
@@ -204,7 +208,66 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: 'white',
     alignSelf: 'center'
-  }
+  },  
+  profileInner: {
+    alignSelf: 'center',
+    backgroundColor: '#FFF9CC',
+    width: '90%',
+    marginTop: 5,
+    borderRadius: 10,
+    padding: 15,
+    // height: '100%'
+  },
+
+  //Create User
+  createBG: {
+    backgroundColor: '#8EE8B9',
+    height: '100%',
+    opacity: 0.67
+  },
+  createView: {
+    alignSelf: 'center',
+    backgroundColor: '#FFF9CC',
+    width: '90%',
+    marginTop: 40,
+    borderRadius: 10,
+    padding: 15,
+    // height: '100%'
+  },
+  createHeaders: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    // marginTop: 8
+  },
+  createInput: {
+    backgroundColor: 'white',
+    marginBottom: 8
+
+  },
+  genreInstrPickerView: {
+    flexDirection: 'row',
+    // justifyContent: 'space-between'
+  },
+  genrePicker: {
+    height: 50, 
+    width: 150
+  },
+  instrPicker: {
+    height: 50, 
+    width: 150
+  },
+  createSubmitButton: {
+    alignSelf: 'flex-end',
+    alignContent: 'center',
+    justifyContent: 'center',
+    // backgroundColor: '#FFF9CC',
+    backgroundColor: 'white',
+    width: '35%',
+    borderRadius: 8,
+    padding: 10,
+    marginTop: 8,
+    backgroundColor: 'gray'
+  },
 
 
 

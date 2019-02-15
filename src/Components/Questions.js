@@ -10,7 +10,7 @@ export default class Questions extends React.Component {
   constructor(props) {
     super(props)
     this.state={
-      userId: 7,
+      userId: 8,
       currentQ: {},
       answer: 0,
     }
