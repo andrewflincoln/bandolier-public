@@ -5,6 +5,7 @@ import Playlist from './src/Components/Playlist'
 import NavBar from './src/Components/NavBar'
 import Questions from './src/Components/Questions'
 import Create from './src/Components/Create'
+import SearchPage from './src/Components/SearchPage'
 
 
 
@@ -17,10 +18,11 @@ const MainNavigator = createStackNavigator(
     Playlist: {screen: Playlist},
     NavBar: {screen: NavBar},
     Questions: {screen: Questions},
-    Create: {screen: Create}
+    Create: {screen: Create},
+    SearchPage: {screen: SearchPage}
 },
 {
-  initialRouteName: 'Home', //change
+  initialRouteName: 'SearchPage', //change
   defaultNavigationOptions: {
     header: null,
   }

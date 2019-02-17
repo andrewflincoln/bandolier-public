@@ -50,6 +50,9 @@ export default class Questions extends React.Component {
   navPlaylist = () => {
     this.props.navigation.navigate('Playlist')
   }
+  navSearch= () => {
+    this.props.navigation.navigate('SearchPage')
+  }
   
 
 
@@ -64,6 +67,7 @@ export default class Questions extends React.Component {
         userId={this.state.userId}
         navPlaylist={this.navPlaylist}
         navHome={this.navHome}
+        navHome={this.navSearch}
 
       />
 

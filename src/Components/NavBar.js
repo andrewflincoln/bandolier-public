@@ -28,7 +28,7 @@ export default class NavBar extends React.Component {
             <Text style={styles.navBarFont}>Profile</Text>
           </TouchableOpacity>
         
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.props.navSearch}>
             <IconI color="white" name="ios-search" size={25} />
             <Text style={styles.navBarFont}>Search</Text>
           </TouchableOpacity>

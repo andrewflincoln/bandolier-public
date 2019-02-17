@@ -271,6 +271,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     marginTop: 8,
+    marginLeft: 8,
     backgroundColor: 'gray'
   },
   otherModal: {
@@ -285,9 +286,86 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 15,
     
-  }
+  },
 
+  //SearchPage
+  searchBG: {
+    backgroundColor: '#8EE8B9',
+    height: '100%',
+    opacity: 0.75
 
+  },
+  searchView: {
+    alignSelf: 'center',
+    backgroundColor: '#FFF9CC',
+    width: '90%',
+    marginTop: 5,
+    borderRadius: 10,
+    padding: 15,
+    // height: '100%'
+  },
+  searchPickersRow: {
+    flexDirection: 'row'
+  },
+  searchGenrePicker: {   //combine if these end up the same
+    height: 50, 
+    width: 150
+  },
+  searchGenrePicker: {
+    height: 50, 
+    width: 150,
+    marginBottom: 20
+  },
+  searchResultsView: {
+    width: '90%',
+    alignSelf: 'center'
+  },
+  searchListRow: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    height: 80,
+    width: '100%',
+    marginTop: 5,
+
+    backgroundColor: '#FFF9CC',
+    // backgroundColor: 'white',
+    borderRadius: 10
+   
+  },  
+  searchButtonsRow: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
+  },
+  searchGoButton: {
+    marginLeft: 8
+  },
+  searchModifyButton: {
+    alignContent: 'center',
+    justifyContent: 'center',
+    alignSelf: 'flex-end',
+    // backgroundColor: '#FFF9CC',
+    backgroundColor: 'white',
+    width: '45%',
+    borderRadius: 8,
+    padding: 10,
+    marginLeft: 5,
+    marginRight: 20,
+    marginTop: 5,
+    backgroundColor: 'gray'
+  },
+  searchModifyText: {
+    color: 'white',
+    fontSize: 20,
+    alignSelf: 'center'
+  },
+  otherInput: {
+    backgroundColor: 'white',
+    marginBottom: 8,
+    marginTop: 9,
+    width: '90%',
+    alignSelf: 'flex-start'
+
+  },
 
 
 

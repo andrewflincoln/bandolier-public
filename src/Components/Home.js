@@ -58,6 +58,10 @@ export default class Home extends React.Component {
   navCreate = () => {
     this.props.navigation.navigate('Create')
   }
+  navSearch= () => {
+    this.props.navigation.navigate('SearchPage')
+  }
+ 
  
  
 
@@ -73,6 +77,7 @@ export default class Home extends React.Component {
             navPlaylist={this.navPlaylist}
             navQuestions={this.navQuestions}
             navCreate={this.navCreate}
+            navSearch={this.navSearch}
 
           />
 
