@@ -2,15 +2,6 @@ import React from 'react';
 import { StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  profileBG: {
-    backgroundColor: '#8EE8B9',
-    height: '100%',
-    opacity: 0.8
-
-  }, 
-  imgBG: {
-    width: '100%',
-  },
 
 
 
@@ -49,7 +40,18 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   userCardScroll: {
-    height: '100%'
+    height: '100%',
+    marginTop: 6,
+  },
+
+  profileBG: {
+    backgroundColor: '#8EE8B9',
+    height: '100%',
+    opacity: 0.8
+
+  }, 
+  imgBG: {
+    width: '100%',
   },
 
 
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: '#FFF9CC',
     width: '90%',
-    marginTop: 5,
+    // marginTop: 200,
     borderRadius: 10,
     padding: 15,
     // height: '100%'
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
   profileTextSectionHead: {
     fontSize: 14,
     fontWeight: 'bold',
-    // marginTop: 2
+    marginTop: 2
   },
   profileTextDeal: {
     // fontSize: 18,
@@ -122,7 +124,8 @@ const styles = StyleSheet.create({
 
   playlistView: {
     backgroundColor: '#8EE8B9',
-    height: '100%'
+    height: '100%',
+    opacity: 0.7
   },
   playlistRow: {
     flexDirection: 'row',
@@ -130,6 +133,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 5,
     marginLeft: 5,
+    paddingRight: 5,
     backgroundColor: '#FFF9CC',
     // backgroundColor: 'white',
     borderRadius: 10
@@ -152,13 +156,14 @@ const styles = StyleSheet.create({
   questionsPage: {
     backgroundColor: '#8EE8B9',
     height: '100%',
+    opacity: 0.85
   },
   questionCard: {
     alignSelf: 'center',
     // backgroundColor: '#FFF9CC',
     backgroundColor: 'white',
     width: '90%',
-    marginTop: 60,
+    marginTop: 80,
     marginBottom: 10,
     borderRadius: 8,
     borderColor: 'gray',
@@ -179,8 +184,8 @@ const styles = StyleSheet.create({
   },
   selectedAnswer: {
     alignSelf: 'center',
-    // backgroundColor: '#FFAF99',
-    backgroundColor: '#C4EDFF',
+    backgroundColor: '#FFAF99',
+    // backgroundColor: '#C4EDFF',
     width: '93%',
     marginTop: 5,
     borderRadius: 8,
@@ -268,6 +273,19 @@ const styles = StyleSheet.create({
     marginTop: 8,
     backgroundColor: 'gray'
   },
+  otherModal: {
+    backgroundColor: 'gray',
+    width: '50%'
+  },
+  modalView: {
+    alignSelf: 'center',
+    backgroundColor: '#FFAF99',
+    width: '90%',
+    marginTop: 140,
+    borderRadius: 10,
+    padding: 15,
+    
+  }
 
 
 

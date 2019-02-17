@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View, TouchableOpacity} from 'react-native'
+import {Text, View, TouchableOpacity, ImageBackground} from 'react-native'
 import styles from '../styles'
 import axios from 'axios'
 import NavBar from './NavBar'
@@ -57,7 +57,7 @@ export default class Questions extends React.Component {
     const q = this.state.currentQ
     return (
 
-    
+      <ImageBackground source={require(`../guitars/IMG_20190208_070255309_HDR.jpg`)} style={styles.imgBG} >
       <View style={styles.questionsPage}>
 
       <NavBar
@@ -105,6 +105,7 @@ export default class Questions extends React.Component {
 
 
       </View>
+      </ImageBackground>
     )
   }
 

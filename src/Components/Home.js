@@ -55,6 +55,10 @@ export default class Home extends React.Component {
   navQuestions = () => {
     this.props.navigation.navigate('Questions')
   }
+  navCreate = () => {
+    this.props.navigation.navigate('Create')
+  }
+ 
  
 
   render() {
@@ -67,6 +71,9 @@ export default class Home extends React.Component {
           <NavBar
             userId={this.state.userId}
             navPlaylist={this.navPlaylist}
+            navQuestions={this.navQuestions}
+            navCreate={this.navCreate}
+
           />
 
           <ScrollView style={styles.userCardScroll}>

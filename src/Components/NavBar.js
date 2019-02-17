@@ -23,7 +23,7 @@ export default class NavBar extends React.Component {
     
       <View style={styles.navBar}>
         {/* <View style={styles.navBarInner}> */}
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.props.navCreate}>
             <IconM color="white" name="guitar-pick" size={25} />
             <Text style={styles.navBarFont}>Profile</Text>
           </TouchableOpacity>

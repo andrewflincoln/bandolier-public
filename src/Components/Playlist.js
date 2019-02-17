@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, TouchableOpacity, View, Button} from 'react-native'
+import {Text, TouchableOpacity, View, ImageBackground} from 'react-native'
 import NavBar from './NavBar'
 import PlaylistRow from './PlaylistRow'
 
@@ -41,22 +41,24 @@ export default class Playlist extends React.Component {
   render() {
     const {navigate} = this.props.navigation
     return (
-      <View style={styles.playlistView}>  
-        <NavBar
-          navHome={this.navHome}
-          navQuestions={this.navQuestions}
-          userId = {this.state.userId}
-        />
-        {
-          this.state.listUsers.map(guy => 
-            <PlaylistRow
-              key={guy.id}
-              user={guy}
-            />
-          )
-        }
+      <ImageBackground source={require('../guitars/IMG_20190208_070218915_HDR.jpg')} style={styles.imgBG}>
+        <View style={styles.playlistView}>  
+          <NavBar
+            navHome={this.navHome}
+            navQuestions={this.navQuestions}
+            userId = {this.state.userId}
+          />
+          {
+            this.state.listUsers.map(guy => 
+              <PlaylistRow
+                key={guy.id}
+                user={guy}
+              />
+            )
+          }
 
-      </View>
+        </View>
+      </ImageBackground>
     )
   }
 }

@@ -20,12 +20,14 @@ const MainNavigator = createStackNavigator(
     Create: {screen: Create}
 },
 {
-  initialRouteName: 'Create', //change
+  initialRouteName: 'Home', //change
   defaultNavigationOptions: {
     header: null,
   }
 }
 )
+
+
 
 const App = createAppContainer(MainNavigator)
 
