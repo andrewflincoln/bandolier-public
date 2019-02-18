@@ -43,7 +43,7 @@ export default class NavBar extends React.Component {
             <Text style={styles.navBarFont}>Playlist</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.props.navContact}>
             <IconM color="white" name="radio-tower" size={25} />
             <Text style={styles.navBarFont}>Contact</Text>
           </TouchableOpacity>

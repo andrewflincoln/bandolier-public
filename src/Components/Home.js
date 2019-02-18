@@ -61,6 +61,9 @@ export default class Home extends React.Component {
   navSearch= () => {
     this.props.navigation.navigate('SearchPage')
   }
+  navContact= () => {
+    this.props.navigation.navigate('Contact')
+  }
  
  
  

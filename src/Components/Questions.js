@@ -20,15 +20,6 @@ export default class Questions extends React.Component {
     this.getNextQuestion()
   }
 
-  // getNextQuestion = async () =>  { //sometimes getting a 304 error here (not on Postman)
-  //   fetch(`${BASE_URL}/questions/next/${this.state.userId}`)
-  //   .then(response => response.json())
-  //   .then(response => this.setState({currentQ: response}))
-  //   .then(() => this.setState({answer: 0}))
-  //   .catch(() => console.log('failed to get next q'))
-
-  // }
-
   getNextQuestion = () =>  { //sometimes getting a 304 error here (but not on Postman)
     axios.get(`${BASE_URL}/questions/next/${this.state.userId}`)
     .then(response => {
@@ -53,6 +44,10 @@ export default class Questions extends React.Component {
   navSearch= () => {
     this.props.navigation.navigate('SearchPage')
   }
+  navContact= () => {
+    this.props.navigation.navigate('navContact')
+  }
+  
   
 
 
@@ -67,6 +62,7 @@ export default class Questions extends React.Component {
         userId={this.state.userId}
         navPlaylist={this.navPlaylist}
         navHome={this.navHome}
+        navHome={this.navContact}
         navHome={this.navSearch}
 
       />

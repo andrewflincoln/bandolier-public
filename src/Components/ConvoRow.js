@@ -7,24 +7,23 @@ import IconF from 'react-native-vector-icons/FontAwesome'
 import IconI from 'react-native-vector-icons/Ionicons'
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
 
-function PlaylistRow(props) {
-  console.log('chatter props are ' + JSON.stringify(props))
+function ConvoRow(props) {
+  console.log('props are ' + JSON.stringify(props))
 return (
-    <View style={styles.playlistRow}>
+    <TouchableOpacity style={styles.convoRow} onPress={() => props.goToChat(props.user.id)}>
       <Image 
-        style={styles.rowPic} 
+        style={styles.convoRowPic} 
         source={{uri: props.user.img_url}} 
       />
 
       <View style={styles.rowTextBox}>
         <Text style={styles.rowTextName}>{props.user.username}</Text>
-        <Text>{props.user.deal}</Text>
+        <Text>{props.user.body}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
 
 
   )
 }
 
-
-export default PlaylistRow
+export default ConvoRow

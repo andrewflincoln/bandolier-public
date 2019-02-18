@@ -368,6 +368,87 @@ const styles = StyleSheet.create({
   },
 
 
+  //Contact
+  convoRow: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    height: 65,
+    width: '98%',
+    marginTop: 10,
+
+    // backgroundColor: '#FFF9CC',
+    backgroundColor: 'white',
+    borderRadius: 30
+   
+  },  
+  convoRowPic: {
+    width: '25%',
+    borderRadius: 30,
+    marginRight: 5,
+  },  
+  // messageScroll: {
+  //   height: 250
+  // },
+  // messageScrollKEY: {
+  //   height: 150,
+  
+  // },
+  messagesViewNoKeys: {
+   
+
+  },
+  messagesViewKeys: {
+    height: 250
+  },
+  messageRowLeft: {
+    // flexDirection: 'row',
+    alignSelf: 'flex-start',
+    height: 65,
+    width: '85%',
+    marginTop: 10,
+    justifyContent: 'center',
+    // backgroundColor: '#FFF9CC',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 15,
+
+  }, 
+  messageRowRight: {
+    // flexDirection: 'row',
+    alignSelf: 'flex-end',
+    minHeight: 65,
+    width: '85%',
+    marginTop: 10,
+    justifyContent: 'center',
+    // backgroundColor: '#FFF9CC',
+    backgroundColor: 'white',
+    borderRadius: 15,
+    padding: 10,
+  
+  }, 
+  messageFont: {
+    fontSize: 18
+  },
+  inputSendRow: {
+    flexDirection: 'row'
+  },  
+  messageInput: {
+    fontSize: 18,
+    alignSelf: 'flex-end',
+    minHeight: 65,
+    marginTop: 10,
+    width: '70%',
+    justifyContent: 'center',
+    backgroundColor: '#FFF9CC',
+    // backgroundColor: 'white',
+    borderRadius: 15,
+    padding: 10,
+  },
+  messageSubmit: {
+
+  }
+
+
 
 });
 
