@@ -1,10 +1,16 @@
 import React from 'react'
 import {Text, View, ImageBackground, Image, Button, ScrollView} from 'react-native'
 import styles from '../styles'
+import {Audio} from 'expo'
 
 
 function UserCard(props) {
    const {img_url} = props.user
+
+
+
+
+
   return (
 
     <View style={styles.profileInner}>  

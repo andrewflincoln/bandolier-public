@@ -1,4 +1,4 @@
-
+import {AppRegistry} from 'react-native'
 import Home from './src/Components/Home'
 import Login from './src/Components/Login'
 import Playlist from './src/Components/Playlist'
@@ -35,10 +35,9 @@ const MainNavigator = createStackNavigator(
 }
 )
 
-
-
 const App = createAppContainer(MainNavigator)
 
 export default App
+
 
 

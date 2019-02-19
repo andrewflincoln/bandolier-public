@@ -8,6 +8,10 @@ import UserCard from './UserCard'
 import PlayBar from './PlayBar'
 import NavBar from './NavBar'
 
+import {Audio} from 'expo'
+
+// autolux `https://dl.dropboxusercontent.com/s/r8soza05f4cpe62/Autolux-Turnstile%20Blues.mp3?dl=0`
+// vivian girls video `https://dl.dropboxusercontent.com/s/pzccaq35w4yknwi/vivian_girls_allthetime.mp4?dl=0`
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
 
@@ -23,8 +27,12 @@ export default class Home extends React.Component {
   }
 
   componentWillMount = () => {
+
     this.nextUser()
   }
+  // componentDidMount = () => {
+
+  // }
 
 
   nextUser = () =>  { //find next user to show while browsing
@@ -34,13 +42,11 @@ export default class Home extends React.Component {
     })
     .catch(() => console.log('failed to get next user'))
 
-
     axios.get(`${BASE_URL}/users/comp/${this.state.userId}/${this.state.currentUser.id}`)
     .then(response => {
         this.state.currentUser.match=response
     })
     .catch(() => console.log('failed to get next user'))
-
   }
 
   judgeUser = (judgedId, status) => {
@@ -72,11 +78,22 @@ export default class Home extends React.Component {
  
 
   render() {
+    //Expo audio
+    const soundObject = new Audio.Sound();
+    soundObject.loadAsync(require('../tracks/turnstile_blues.mp3'))
+    .then(soundObject.playAsync())
+      // Your sound is playing!
+    .catch(error =>  {
+      console.log('An error occurred!')
+    })
 
 
     const {navigate} = this.props.navigation
     return (
+
+      
       <ImageBackground source={require('../guitars/IMG_20190208_065249773_HDR.jpg')} style={styles.imgBG}>
+
         <View style={styles.profileBG}>
           <NavBar
             userId={this.state.userId}
@@ -100,7 +117,7 @@ export default class Home extends React.Component {
           judgeUser={this.judgeUser}
           nextUser={this.nextUser}
         />
-      
+      <Button title='roll it jim' onPress={() => soundObject.playAsync()} />  
     
         </View>
       </ImageBackground>
