@@ -62,7 +62,10 @@ export default class Home extends React.Component {
     this.props.navigation.navigate('SearchPage')
   }
   navContact= () => {
-    this.props.navigation.navigate('Contact')
+    this.props.navigation.navigate('Contact', {userId: this.state.userId})
+  }
+  navProfile= () => {
+    this.props.navigation.navigate('MyProfile', {userId: this.state.userId})
   }
  
  
@@ -82,6 +85,7 @@ export default class Home extends React.Component {
             navCreate={this.navCreate}
             navSearch={this.navSearch}
             navContact={this.navContact}
+            navProfile={this.navProfile}
           />
 
           <ScrollView style={styles.userCardScroll}>

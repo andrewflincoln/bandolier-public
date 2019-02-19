@@ -10,7 +10,7 @@ export default class Questions extends React.Component {
   constructor(props) {
     super(props)
     this.state={
-      userId: 8,
+      userId: 2,
       currentQ: {},
       answer: 0,
     }
@@ -45,7 +45,10 @@ export default class Questions extends React.Component {
     this.props.navigation.navigate('SearchPage')
   }
   navContact= () => {
-    this.props.navigation.navigate('navContact')
+    this.props.navigation.navigate('Contact', {userId: this.state.userId})
+  }
+  navProfile= () => {
+    this.props.navigation.navigate('MyProfile', {userId: this.state.userId})
   }
   
   
@@ -64,6 +67,7 @@ export default class Questions extends React.Component {
         navHome={this.navHome}
         navContact={this.navContact}
         navHome={this.navSearch}
+        navProfile={this.navProfile}
 
       />
 

@@ -5,13 +5,13 @@ import IconF from 'react-native-vector-icons/FontAwesome'
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
-function PlaylistBar(props) {
+function SearchedBar(props) {
   
   return (
-    
+   
     <View style={styles.playBar}>
 
-      <TouchableOpacity onPress={props.navPlaylist}>
+      <TouchableOpacity onPress={props.navSearch}>
         <IconM color="black" name="skip-previous" size={55} />
       </TouchableOpacity>
       
@@ -19,8 +19,8 @@ function PlaylistBar(props) {
         <IconF color="black" name="stop" size={25} />
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => props.unList(props.user.id)}>
-        <IconM color="black" name="playlist-remove" size={25} />
+      <TouchableOpacity onPress={() => props.addToPlaylist(props.user.id)}>
+        <IconF color="black" name="play" size={35} />
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => props.contactUser(props.user)}>
@@ -34,4 +34,4 @@ function PlaylistBar(props) {
 
 }
 
-export default PlaylistBar
+export default SearchedBar

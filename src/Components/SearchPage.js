@@ -49,6 +49,11 @@ export default class SearchPage extends React.Component {
     this.setState({genre_1: '', instr_1: '', heroes: '', influences: '', instr_other: false, genre_other: false})
   }
 
+  goToProfile = (user) => {
+    console.log('user passed: ' + JSON.stringify(user))
+    this.props.navigation.navigate('ProfileDisplay', {viewUser: user, barType: 'search'})
+  }
+
   navPlaylist = () => {
     this.props.navigation.navigate('Playlist')
   }
@@ -60,6 +65,9 @@ export default class SearchPage extends React.Component {
   }
   navHome= () => {
     this.props.navigation.navigate('Home')
+  }
+  navContact= () => {
+    this.props.navigation.navigate('Contact', {userId: this.state.userId})
   }
  
 
@@ -74,6 +82,7 @@ export default class SearchPage extends React.Component {
           navQuestions={this.navQuestions}
           navCreate={this.navCreate}
           navHome={this.navHome}
+          navContact={this.navContact}
         />
       
           
@@ -214,6 +223,7 @@ export default class SearchPage extends React.Component {
                   <SearchListRow
                     key={guy.id}
                     user={guy}
+                    goToProfile={this.goToProfile}
                   />
                 )
               }

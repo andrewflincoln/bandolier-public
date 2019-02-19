@@ -104,7 +104,14 @@ const styles = StyleSheet.create({
     height: 65,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    // marginTop: 10
+  }, 
+  profileBar: {
+    backgroundColor: 'white',
+    alignItems: 'center',
+    height: 65,
+    flexDirection: 'row',
+    paddingRight: 30,
+    justifyContent: 'flex-end'
   }, 
 
   navBar: {
@@ -133,7 +140,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 5,
     marginLeft: 5,
-    paddingRight: 5,
+    paddingRight: 10,
     backgroundColor: '#FFF9CC',
     // backgroundColor: 'white',
     borderRadius: 10
@@ -485,7 +492,23 @@ const styles = StyleSheet.create({
   },
   messageSubmit: {
 
-  }
+  },
+
+  //My Profile 
+  myProfileHeadlineView: {
+    fontSize: 30,
+    backgroundColor: 'white',
+    width: '100%',
+    marginTop: 10,
+    marginLeft: 8,
+    paddingLeft: 15,
+    paddingTop: 5,
+    paddingBottom: 5,
+    borderRadius: 10
+  },
+ myProfileHeadlineText: {
+    fontSize: 25,
+  },
 
 
 

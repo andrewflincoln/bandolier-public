@@ -17,7 +17,7 @@ export default class Contact extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: 2,// 
+      userId: 0,// 
       messages: [],
       convos: [],
 
@@ -28,12 +28,17 @@ export default class Contact extends React.Component {
     }
   }
 
-
+  componentWillMount = () => {
+    this.setState({userId: this.props.navigation.getParam('userId')})
+  }
   componentDidMount = () => {
-    if (this.props.navigation.getParam('chatUser')) {
-      // this.setState({chatter: this.props.navigation.getParam('chatUser'), inChat: true})
-      this.goToChat(this.props.navigation.getParam('chatUser').id)
+    // if (this.props.navigation.getParam('userId')) {
+    //    this.setState({userId: this.props.navigation.getParam('userId')}) //gets param but won't set state
+    // }   
+    if (this.props.navigation.getParam('chatUser')) { //check if taken here from user page
+      this.goToChat(this.props.navigation.getParam('chatUser').id) //this pulls down the user but already have them here. could cut down.
     }
+    console.log(this.props.navigation.getParam('userId'), this.state.userId)
 
     this.getConvos()
     this.keyboardDidShowListener = Keyboard.addListener(
@@ -47,16 +52,13 @@ export default class Contact extends React.Component {
     // this.props.navigation.addListener('willFocus', this.getConvos) //refresh on each view?
   }
   _keyboardDidShow= () =>  {
-    console.log(' the keyboard totally showed!@')
     this.setState({keysUp: true})
   }
   _keyboardDidHide= () =>  {
-    console.log(' the keyboard totally hided!@')
     this.setState({keysUp: false})
   }
 
   getConvos = () => {
-    console.log('starting get convos')
     axios.get(`${BASE_URL}/messages/convos/${this.state.userId}`)
     .then(response => this.setState({convos: response.data}))
     .catch(() => console.log('failed to get convos'))
@@ -80,22 +82,12 @@ export default class Contact extends React.Component {
     .catch(() => console.log('could not send message'))
 
     this.goToChat(this.state.chatter.id)
-    
+
   }
 
   backToList = () => {
     this.setState({inChat: false})
   }
-
-  // getMessages = (user2) => {
-  //   console.log('starting Get messages')
-  //   axios.get(`${BASE_URL}/messages/${this.state.userId}/${user2}`)
-  //   .then(response => this.setState({messages: response.data.rows}))
-  //   .then(() => console.log(this.state.messages))
-  //   .catch(() => console.log('failed to get messages'))
-
-  // }
-
 
   navHome = () => {//prop function for navbar
     this.props.navigation.navigate('Home')
@@ -109,11 +101,16 @@ export default class Contact extends React.Component {
   navPlaylist= () => {
     this.props.navigation.navigate('Playlist')
   }
+  navProfile= () => {
+    this.props.navigation.navigate('MyProfile', {userId: this.state.userId})
+  }
+
   
 
   render() {
     const {navigate} = this.props.navigation
-    return (                            //mic pic?
+  
+    return (                              //mic pic
       <ImageBackground source={require('../guitars/IMG_20190208_070218915_HDR.jpg')} style={styles.imgBG}> 
         <View style={styles.playlistView}>  
           <NavBar
@@ -121,6 +118,7 @@ export default class Contact extends React.Component {
             navQuestions={this.navQuestions}
             navSearch={this.navSearch}
             navPlaylist={this.navPlaylist}
+            navProfile={this.navProfile}
             userId = {this.state.userId}
           />
 

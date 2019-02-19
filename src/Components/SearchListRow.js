@@ -10,6 +10,7 @@ import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
 function SearchListRow(props) {
   console.log('props are ' + JSON.stringify(props))
 return (
+  <TouchableOpacity onPress={() => props.goToProfile(props.user)}>
     <View style={styles.searchListRow}>
       <Image 
         style={styles.rowPic} 
@@ -21,6 +22,7 @@ return (
         <Text>{props.user.deal}</Text>
       </View>
     </View>
+  </TouchableOpacity>
 
 
   )

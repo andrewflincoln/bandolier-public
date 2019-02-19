@@ -4,7 +4,7 @@ import NavBar from './NavBar'
 import PlaylistRow from './PlaylistRow'
 
 import styles from '../styles'
-import Axios from 'axios';
+import axios from 'axios';
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
 export default class Playlist extends React.Component {
@@ -18,17 +18,16 @@ export default class Playlist extends React.Component {
     }
   }
 
-
   componentDidMount = () => {
     this.getPlaylist()
     this.props.navigation.addListener('willFocus', this.getPlaylist) //
   }
 
+
   getPlaylist = () => {
     console.log('starting get playlist')
-    fetch(`${BASE_URL}/relations/playlist/${this.state.userId}`)
-    .then(response => response.json())
-    .then(response => this.setState({listUsers: response.rows}))
+    axios.get(`${BASE_URL}/relations/playlist/${this.state.userId}`)
+    .then(response => this.setState({listUsers: response.data.rows}))
   }
 
   navHome = () => {//prop function for navbar
@@ -41,12 +40,15 @@ export default class Playlist extends React.Component {
     this.props.navigation.navigate('SearchPage')
   }
   navContact= () => {
-    this.props.navigation.navigate('Contact')
+    this.props.navigation.navigate('Contact', {userId: this.state.userId})
+  }
+  navProfile= () => {
+    this.props.navigation.navigate('MyProfile', {userId: this.state.userId})
   }
 
   goToProfile = (user) => {
     console.log('user passed: ' + JSON.stringify(user))
-    this.props.navigation.navigate('ProfileDisplay', {viewUser: user, contactUser: this.contactUser})
+    this.props.navigation.navigate('ProfileDisplay', {viewUser: user, barType: 'playlist'})
   }
 
  
@@ -61,7 +63,9 @@ export default class Playlist extends React.Component {
             navQuestions={this.navQuestions}
             navSearch={this.navSearch}
             navContact={this.navContact}
+            navProfile={this.navProfile}
             userId = {this.state.userId}
+        
           />
           {
             this.state.listUsers.map(guy => 

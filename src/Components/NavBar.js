@@ -18,6 +18,8 @@ export default class NavBar extends React.Component {
 
   
   render() {
+
+  
     // const {navigate} = this.props.navigation
     return (
     
