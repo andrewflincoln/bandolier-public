@@ -1,52 +1,37 @@
 import React from 'react'
 import {Text, View, ImageBackground, Image, Button, ScrollView} from 'react-native'
-import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux'
 import axios from 'axios'
 import styles from '../styles'
-import UserCard from './UserCard'
-import PlayBar from './PlayBar'
+
+import PlaylistBar from './PlaylistBar'
 import NavBar from './NavBar'
+import UserCard from './UserCard'
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
 
-export default class Home extends React.Component {
+export default class ProfileDisplay extends React.Component {
   constructor(props) {
     super(props)
 
     this.state= {
       userId: 2,   //'',
+      viewId: 1,
       currentUser: {},
-      recents: []
     }
   }
 
   componentWillMount = () => {
-    this.nextUser()
+    this.setState({currentUser: this.props.navigation.getParam('viewUser')})
   }
 
-
-  nextUser = () =>  { //find next user to show while browsing
-    axios.get(`${BASE_URL}/users/next/${this.state.userId}`)
+  getUser = () =>  { 
+    axios.get(`${BASE_URL}/users/${this.state.viewId}`) //might be props
     .then(response => {
-        this.setState({currentUser: response.data})
+        // console.log(JSON.stringify(response))
+        this.setState({currentUser: response.data[0]})
     })
-    .catch(() => console.log('failed to get next user'))
-
-
-    axios.get(`${BASE_URL}/users/comp/${this.state.userId}/${this.state.currentUser.id}`)
-    .then(response => {
-        this.state.currentUser.match=response
-    })
-    .catch(() => console.log('failed to get next user'))
-
-  }
-
-  judgeUser = (judgedId, status) => {
-    axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: judgedId, status: status})
-    .then(this.nextUser())
-    .catch(() => console.log('failed to play user'))
+    .catch(() => console.log('failed to get user'))
   }
 
   navPlaylist = () => {
@@ -64,8 +49,13 @@ export default class Home extends React.Component {
   navContact= () => {
     this.props.navigation.navigate('Contact')
   }
+  navHome= () => {
+    this.props.navigation.navigate('Home')
+  }
  
- 
+  contactUser = (user) => {
+    this.props.navigation.navigate('Contact', {chatUser: user})
+  }
  
 
   render() {
@@ -73,7 +63,7 @@ export default class Home extends React.Component {
 
     const {navigate} = this.props.navigation
     return (
-      <ImageBackground source={require('../guitars/IMG_20190208_065249773_HDR.jpg')} style={styles.imgBG}>
+      <ImageBackground source={require(`../guitars/fender_amp_grill.jpg`)} style={styles.imgBG}>
         <View style={styles.profileBG}>
           <NavBar
             userId={this.state.userId}
@@ -91,10 +81,12 @@ export default class Home extends React.Component {
           
           </ScrollView>
         
-        <PlayBar
+        <PlaylistBar //conditional bars
           user={this.state.currentUser}
           judgeUser={this.judgeUser}
           nextUser={this.nextUser}
+          contactUser={this.contactUser}
+          navPlaylist={this.navPlaylist}
         />
       
     
@@ -105,26 +97,3 @@ export default class Home extends React.Component {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-  // using localhost with phone:
-  // getUser(userId) {        //This works - prints out data stringified below
-  //   axios.get('https://rallycoding.herokuapp.com/api/music_albums')
-  //   .then(responseJson => {
-  //     console.log('response...?')
-  //     console.log(responseJson.data)
-  //     this.setState({currentUser: responseJson.data})
-  //   })
-  //   .catch(console.log(`could not get user`))
-  // }
-  

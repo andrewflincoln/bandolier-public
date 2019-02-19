@@ -7,6 +7,7 @@ import Questions from './src/Components/Questions'
 import Create from './src/Components/Create'
 import SearchPage from './src/Components/SearchPage'
 import Contact from './src/Components/Contact'
+import ProfileDisplay from './src/Components/ProfileDisplay'
 
 
 
@@ -21,10 +22,11 @@ const MainNavigator = createStackNavigator(
     Questions: {screen: Questions},
     Create: {screen: Create},
     SearchPage: {screen: SearchPage},
-    Contact: {screen: Contact}
+    Contact: {screen: Contact},
+    ProfileDisplay: {screen: ProfileDisplay}
 },
 {
-  initialRouteName: 'Contact', //change
+  initialRouteName: 'Playlist', //change
   defaultNavigationOptions: {
     header: null,
   }

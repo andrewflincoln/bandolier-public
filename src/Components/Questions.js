@@ -62,7 +62,7 @@ export default class Questions extends React.Component {
         userId={this.state.userId}
         navPlaylist={this.navPlaylist}
         navHome={this.navHome}
-        navHome={this.navContact}
+        navContact={this.navContact}
         navHome={this.navSearch}
 
       />

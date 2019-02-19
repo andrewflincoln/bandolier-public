@@ -44,6 +44,13 @@ export default class Playlist extends React.Component {
     this.props.navigation.navigate('Contact')
   }
 
+  goToProfile = (user) => {
+    console.log('user passed: ' + JSON.stringify(user))
+    this.props.navigation.navigate('ProfileDisplay', {viewUser: user, contactUser: this.contactUser})
+  }
+
+ 
+
   render() {
     const {navigate} = this.props.navigation
     return (
@@ -53,7 +60,7 @@ export default class Playlist extends React.Component {
             navHome={this.navHome}
             navQuestions={this.navQuestions}
             navSearch={this.navSearch}
-            navHome={this.navContact}
+            navContact={this.navContact}
             userId = {this.state.userId}
           />
           {
@@ -61,6 +68,7 @@ export default class Playlist extends React.Component {
               <PlaylistRow
                 key={guy.id}
                 user={guy}
+                goToProfile={this.goToProfile}
               />
             )
           }

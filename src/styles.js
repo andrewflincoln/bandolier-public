@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },  
   rowTextBox: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'column'
   },
   rowTextName: {
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     // backgroundColor: '#FFF9CC',
     backgroundColor: 'white',
     width: '90%',
-    marginTop: 80,
+    marginTop: 70,
     marginBottom: 10,
     borderRadius: 8,
     borderColor: 'gray',
@@ -385,16 +385,33 @@ const styles = StyleSheet.create({
     width: '25%',
     borderRadius: 30,
     marginRight: 5,
+  },
+  chatHeader: {
+    flexDirection: 'row',
+
+  },
+  chatHeaderRow: {
+    flexDirection: 'row',
+    // alignItems: 'center',
+    height: 80,
+    width: '90%',
+    marginTop: 5,
+    // marginLeft: 5,
+    paddingRight: 5,
+    backgroundColor: '#FFF9CC',
+    // backgroundColor: 'white',
+    borderRadius: 10
+   
   },  
   // messageScroll: {
-  //   height: 250
+  //   maxHeight: '74%'
   // },
   // messageScrollKEY: {
   //   height: 150,
   
   // },
   messagesViewNoKeys: {
-   
+   height: '80%'
 
   },
   messagesViewKeys: {
@@ -409,8 +426,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // backgroundColor: '#FFF9CC',
     backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 15,
+    borderRadius: 30,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
+
 
   }, 
   messageRowRight: {
@@ -422,22 +443,40 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // backgroundColor: '#FFF9CC',
     backgroundColor: 'white',
-    borderRadius: 15,
-    padding: 10,
+    borderRadius: 30,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
   
   }, 
   messageFont: {
     fontSize: 18
   },
-  inputSendRow: {
-    flexDirection: 'row'
+  inputSendRowNoKeys: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+
+    padding: 5,
+    alignItems: 'center'
   },  
+  // inputSendRowKeys: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'flex-end',
+  //   alignItems: 'center',
+  //   backgroundColor: 'gray',
+
+  //   padding: 5,
+  //   alignItems: 'center'
+  // }, 
   messageInput: {
     fontSize: 18,
-    alignSelf: 'flex-end',
+    // alignSelf: 'flex-end',
     minHeight: 65,
     marginTop: 10,
-    width: '70%',
+    marginRight: 6,
+    width: '80%',
     justifyContent: 'center',
     backgroundColor: '#FFF9CC',
     // backgroundColor: 'white',
