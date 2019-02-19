@@ -73,20 +73,15 @@ export default class Home extends React.Component {
   navProfile= () => {
     this.props.navigation.navigate('MyProfile', {userId: this.state.userId})
   }
- 
- 
- 
+
 
   render() {
     //Expo audio
     const soundObject = new Audio.Sound();
-    soundObject.loadAsync(require('../tracks/turnstile_blues.mp3'))
-    .then(soundObject.playAsync())
-      // Your sound is playing!
+    soundObject.loadAsync(require('../tracks/vivian_girls_allthetime.mp3'))
     .catch(error =>  {
       console.log('An error occurred!')
     })
-
 
     const {navigate} = this.props.navigation
     return (
@@ -117,7 +112,12 @@ export default class Home extends React.Component {
           judgeUser={this.judgeUser}
           nextUser={this.nextUser}
         />
-      <Button title='roll it jim' onPress={() => soundObject.playAsync()} />  
+      <Button title='roll it jim' onPress={async () => {
+          await soundObject.playAsync()
+          .catch( () => console.log('could not play async')) 
+        }
+      }
+       />  
     
         </View>
       </ImageBackground>
@@ -129,23 +129,3 @@ export default class Home extends React.Component {
 
 
 
-
-
-
-
-
-
-
-
-
-  // using localhost with phone:
-  // getUser(userId) {        //This works - prints out data stringified below
-  //   axios.get('https://rallycoding.herokuapp.com/api/music_albums')
-  //   .then(responseJson => {
-  //     console.log('response...?')
-  //     console.log(responseJson.data)
-  //     this.setState({currentUser: responseJson.data})
-  //   })
-  //   .catch(console.log(`could not get user`))
-  // }
-  
