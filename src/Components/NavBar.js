@@ -11,7 +11,7 @@ export default class NavBar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: 1 ///
+      userId: 2 ///
     }
   }
 
@@ -25,7 +25,7 @@ export default class NavBar extends React.Component {
     
       <View style={styles.navBar}>
         {/* <View style={styles.navBarInner}> */}
-          <TouchableOpacity onPress={this.props.navCreate}>
+          <TouchableOpacity onPress={this.props.navProfile}>
             <IconM color="white" name="guitar-pick" size={25} />
             <Text style={styles.navBarFont}>Profile</Text>
           </TouchableOpacity>

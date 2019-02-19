@@ -28,7 +28,7 @@ const MainNavigator = createStackNavigator(
     MyProfile: {screen: MyProfile}
 },
 {
-  initialRouteName: 'MyProfile', //change
+  initialRouteName: 'Home', //change
   defaultNavigationOptions: {
     header: null,
   }

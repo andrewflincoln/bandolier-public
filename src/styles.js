@@ -151,9 +151,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginRight: 5,
   },  
-  rowTextBox: {
+  rowTextBox: { //changing for search view, might mess up others
     // flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    width: '75%'
   },
   rowTextName: {
     fontWeight: 'bold'
@@ -324,7 +325,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   searchResultsView: {
-    width: '90%',
+    width: '100%',
     alignSelf: 'center'
   },
   searchListRow: {
@@ -333,6 +334,8 @@ const styles = StyleSheet.create({
     height: 80,
     width: '100%',
     marginTop: 5,
+    marginLeft: 10,
+    paddingRight: 20,
 
     backgroundColor: '#FFF9CC',
     // backgroundColor: 'white',

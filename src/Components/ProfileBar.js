@@ -12,7 +12,7 @@ function ProfileBar(props) {
     <View style={styles.profileBar}>
 
 
-      <TouchableOpacity onPress={props.navCreate}>
+      <TouchableOpacity onPress={() => props.navCreate()}>
         <IconM color="black" name="lead-pencil" size={35} />
       </TouchableOpacity>
 

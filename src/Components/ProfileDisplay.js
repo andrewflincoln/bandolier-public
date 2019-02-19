@@ -56,14 +56,14 @@ export default class ProfileDisplay extends React.Component {
     this.props.navigation.navigate('SearchPage')
   }
   navContact= () => {
-    this.props.navigation.navigate('Contact')
+    this.props.navigation.navigate('Contact', {userId: this.state.userId})
   }
   navHome= () => {
     this.props.navigation.navigate('Home')
   }
  
   contactUser = (user) => {
-    this.props.navigation.navigate('Contact', {chatUser: user})
+    this.props.navigation.navigate('Contact', {chatUser: user, userId: this.state.userId})
   }
   addToPlaylist= (user, status) => { //2 function here could be one, depending how much gets added
     axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: user, status: 'played'})
