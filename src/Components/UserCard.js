@@ -6,8 +6,8 @@ import {Audio} from 'expo'
 
 function UserCard(props) {
    const {img_url} = props.user
-    if (props.playItSam )
-      props.playItSam() //this comes from home, not getting it from playlist
+    // if (props.playItSam )
+    //   props.playItSam() //this comes from home, not getting it from playlist
       //running when new card comes up but doesn't do anything
 
 
