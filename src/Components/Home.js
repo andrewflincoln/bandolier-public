@@ -24,20 +24,16 @@ export default class Home extends React.Component {
       currentSound: new Audio.Sound(),
       
       brantSound: `https://s3-us-west-2.amazonaws.com/bandolier-tracks/brant_bjork_oblivion.mp3`,
-      autoluxSound: `https://s3-us-west-2.amazonaws.com/bandolier-tracks/turnstile_blues.mp3`,
-      vivianSound: `https://s3-us-west-2.amazonaws.com/bandolier-tracks/vivian_girls_allthetime.mp3`
+      autoluxSound: `https://dl.dropboxusercontent.com/s/d4mkk2773cb5wb3/turnstile_blues.mp3?dl=0`,
+      vivanSound: `https://dl.dropboxusercontent.com/s/c1l8lt78ue6i4hm/vivian_girls_allthetime.mp3?dl=0`
     }
   }
 
   componentWillMount = () => {
+    this.state.currentSound = new Audio.Sound()
+    this.state.currentSound.loadAsync({uri: this.state.brantSound})
+    .then( () => this.state.currentSound.playAsync() )
     this.nextUser()
-    // this.state.currentSound = new Audio.Sound()
-    
-    // this.state.currentUser.id % 2 === 0 ? 
-    // this.state.currentSound.loadAsync({uri: this.state.autoluxSound})
-    // .then( () => this.state.currentSound.playAsync() )
-
-  
   }
   // componentDidMount = () => {
   //   this.state.currentSound.playAsync()
@@ -49,9 +45,7 @@ export default class Home extends React.Component {
     .then(response => {
         this.setState({currentUser: response.data})
     })
-    .then( () => this.state.currentSound.loadAsync({uri: this.state.currentUser.url}) )
-    .then( () => this.state.currentSound.playAsync() )
-    .catch(() => console.log('failed to get next user') )
+    .catch(() => console.log('failed to get next user'))
   }
 
   judgeUser = (judgedId, status) => {
@@ -124,7 +118,7 @@ export default class Home extends React.Component {
           judgeUser={this.judgeUser}
           nextUser={this.nextUser}
         />
-      {/* <Button title='roll it jim' onPress={async () => {
+      <Button title='roll it jim' onPress={async () => {
           await this.state.currentSound.playAsync()
           .catch( () => console.log('could not play async')) 
         }
@@ -135,7 +129,7 @@ export default class Home extends React.Component {
 
         }
       }
-       />   */}
+       />  
     
         </View>
       </ImageBackground>
