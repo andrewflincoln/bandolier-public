@@ -47,7 +47,7 @@ export default class Home extends React.Component {
         this.setState({currentUser: response.data})
         console.log(this.state.currentUser.url)
     })
-    .then( () => playUser(this.currentUser.url) )
+    .then( () =>  this.playUser(this.state.currentUser.url) )
     // .then( () => this.state.currentSound.loadAsync({uri: this.state.currentUser.url}) )
     // .then( () => this.state.currentSound.playAsync() )
     .catch(() => console.log('failed to get next user') )
