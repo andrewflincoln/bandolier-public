@@ -110,8 +110,8 @@ export default class Contact extends React.Component {
   render() {
     const {navigate} = this.props.navigation
   
-    return (                              //mic pic
-      <ImageBackground source={require('../guitars/IMG_20190208_070218915_HDR.jpg')} style={styles.imgBG}> 
+    return (                              
+      <ImageBackground source={require('../guitars/mic_tilt_left_big_low.jpg')} style={styles.imgBG}> 
         <View style={styles.playlistView}>  
           <NavBar
             navHome={this.navHome}

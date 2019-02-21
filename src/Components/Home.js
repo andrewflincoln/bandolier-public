@@ -21,7 +21,7 @@ export default class Home extends React.Component {
       userId: 2,   //'',
       currentUser: {},
       recents: [],
-      currentSound: new Audio.Sound(),
+      // currentSound: new Audio.Sound(),
       
       brantSound: `https://s3-us-west-2.amazonaws.com/bandolier-tracks/brant_bjork_oblivion.mp3`,
       autoluxSound: `https://s3-us-west-2.amazonaws.com/bandolier-tracks/turnstile_blues.mp3`,
@@ -41,13 +41,13 @@ export default class Home extends React.Component {
 
 
   nextUser = () =>  { //find next user to show while browsing
+    
     axios.get(`${BASE_URL}/users/next/${this.state.userId}`)
     .then(response => {
-
         this.setState({currentUser: response.data})
-        console.log(this.state.currentUser.url)
+        // console.log('url from nextUser: ', this.state.currentUser.url)
     })
-    // .then( () =>  this.playUser(this.state.currentUser.url) )
+    .then( () =>  this.playUser(this.state.currentUser.url) )
     // .then( () => this.state.currentSound.loadAsync({uri: this.state.currentUser.url}) )
     // .then( () => this.state.currentSound.playAsync() )
     .catch(() => console.log('failed to get next user') )
@@ -78,22 +78,25 @@ export default class Home extends React.Component {
     this.props.navigation.navigate('MyProfile', {userId: this.state.userId})
   }
 
-  playItSam = async () => {
-   this.state.currentSound.playAsync()
-    .catch( () => console.log('could not play async')) 
-  }
+  // playItSam = async () => {
+  //  this.state.currentSound.playAsync()
+  //   .catch( () => console.log('could not play async')) 
+  // }
 
   playUser = async (url) => {
-    const soundObject = new Audio.Sound();
+    this.state.userSound = new Audio.Sound();
     try {
-      await soundObject.loadAsync({uri: url});
-      await soundObject.playAsync();
+      await this.state.userSound.loadAsync({uri: url});
+      await this.state.userSound.playAsync();
     }
     catch (error) {
        console.log('An error occurred!')
     }
   }
-   
+  
+  skipUserSound = async () => {
+   this.state.userSound.stopAsync()
+  }
 
 
   render() {
@@ -126,6 +129,7 @@ export default class Home extends React.Component {
           user={this.state.currentUser}
           judgeUser={this.judgeUser}
           nextUser={this.nextUser}
+          skipUserSound={this.skipUserSound}
         />
 
         </View>
