@@ -24,16 +24,16 @@ export default class Home extends React.Component {
       currentSound: new Audio.Sound(),
       
       brantSound: `https://s3-us-west-2.amazonaws.com/bandolier-tracks/brant_bjork_oblivion.mp3`,
-      autoluxSound: `https://dl.dropboxusercontent.com/s/d4mkk2773cb5wb3/turnstile_blues.mp3?dl=0`,
-      vivanSound: `https://dl.dropboxusercontent.com/s/c1l8lt78ue6i4hm/vivian_girls_allthetime.mp3?dl=0`
+      autoluxSound: `https://s3-us-west-2.amazonaws.com/bandolier-tracks/turnstile_blues.mp3`,
+      vivianSound: `https://s3-us-west-2.amazonaws.com/bandolier-tracks/vivian_girls_allthetime.mp3`
     }
   }
 
   componentWillMount = () => {
-    this.state.currentSound = new Audio.Sound()
-    this.state.currentSound.loadAsync({uri: this.state.brantSound})
-    .then( () => this.state.currentSound.playAsync() )
     this.nextUser()
+    // this.state.currentSound = new Audio.Sound()
+    // this.state.currentSound.loadAsync({uri: this.state.autoluxSound})
+    // .then( () => this.state.currentSound.playAsync() )
   }
   // componentDidMount = () => {
   //   this.state.currentSound.playAsync()
@@ -43,9 +43,14 @@ export default class Home extends React.Component {
   nextUser = () =>  { //find next user to show while browsing
     axios.get(`${BASE_URL}/users/next/${this.state.userId}`)
     .then(response => {
+
         this.setState({currentUser: response.data})
+        console.log(this.state.currentUser.url)
     })
-    .catch(() => console.log('failed to get next user'))
+    .then( () => playUser(this.currentUser.url) )
+    // .then( () => this.state.currentSound.loadAsync({uri: this.state.currentUser.url}) )
+    // .then( () => this.state.currentSound.playAsync() )
+    .catch(() => console.log('failed to get next user') )
   }
 
   judgeUser = (judgedId, status) => {
@@ -78,16 +83,20 @@ export default class Home extends React.Component {
     .catch( () => console.log('could not play async')) 
   }
 
+  playUser = async (url) => {
+    const soundObject = new Audio.Sound();
+    try {
+      await soundObject.loadAsync({uri: url});
+      await soundObject.playAsync();
+    }
+    catch (error) {
+       console.log('An error occurred!')
+    }
+  }
+   
+
 
   render() {
-    // //Expo audio
-    // const soundObject = new Audio.Sound();
-    // // soundObject.loadAsync(require('../tracks/vivian_girls_allthetime.mp3'))
-    // soundObject.loadAsync({uri: this.state.autoluxSound})
-    // .catch(error =>  {
-    //   console.log('An error occurred!')
-    // })
-
     const {navigate} = this.props.navigation
     return (
 
@@ -118,19 +127,7 @@ export default class Home extends React.Component {
           judgeUser={this.judgeUser}
           nextUser={this.nextUser}
         />
-      <Button title='roll it jim' onPress={async () => {
-          await this.state.currentSound.playAsync()
-          .catch( () => console.log('could not play async')) 
-        }
-      }
-       />  
-       <Button title='change the song' onPress={  () => {
-         this.state.currentSound.loadAsync({uri: this.state.vivianSound})
 
-        }
-      }
-       />  
-    
         </View>
       </ImageBackground>
     )//return
