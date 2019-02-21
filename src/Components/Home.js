@@ -38,7 +38,10 @@ export default class Home extends React.Component {
     .then(response => {
         this.setState({currentUser: response.data})
     })
-    .then( () =>  { console.log('url from nextUser: ', this.state.currentUser.url); this.playUser(this.state.currentUser.url) } )
+    .then( () =>  { 
+        console.log('url from nextUser: ', this.state.currentUser.url); 
+        this.state.currentUser.url ? this.playUser(this.state.currentUser.url) : this.playUser(`https://s3-us-west-2.amazonaws.com/bandolier-tracks/elevator_music.mp3`)
+     } )
     .catch(() => console.log('failed to get next user') )
   }
 
@@ -84,7 +87,6 @@ export default class Home extends React.Component {
     }
   }
   
-
 
   stopUserSound = async () => {
    this.state.userSound.stopAsync()
