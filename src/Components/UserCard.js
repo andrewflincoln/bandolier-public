@@ -17,21 +17,21 @@ export default class UserCard extends React.Component {
   //   this.playUser(this.props.user.url)
   // }
 
-  componentWillUnmount() {
-    console.log('unmounting and hopefully stopping track')
-    this.state.userSound.stopAsync()
-  }
+  // componentWillUnmount() {
+  //   console.log('unmounting and hopefully stopping track')
+  //   this.state.userSound.stopAsync()
+  // }
 
-  playUser = async (url) => {
-    this.state.userSound = new Audio.Sound();
-    try {
-      await this.state.userSound.loadAsync({uri: url});
-      await this.state.userSound.playAsync();
-    }
-    catch (error) {
-       console.log(url, error)
-    }
-  }
+  // playUser = async (url) => {
+  //   this.state.userSound = new Audio.Sound();
+  //   try {
+  //     await this.state.userSound.loadAsync({uri: url});
+  //     await this.state.userSound.playAsync();
+  //   }
+  //   catch (error) {
+  //      console.log(url, error)
+  //   }
+  // }
   // playUser = async (url) => {
   //   soundObject= new Audio.Sound();
   //   try {

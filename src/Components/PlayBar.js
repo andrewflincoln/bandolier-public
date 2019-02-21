@@ -18,7 +18,7 @@ function PlayBar(props) {
 
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => { props.nextUser(props.user.id); props.skipUserSound() } }>
+      <TouchableOpacity onPress={() => { props.stopUserSound(); props.nextUser(props.user.id)  } }>
         <IconM color="black" name="skip-next" size={55} />
       </TouchableOpacity>
     </View> 
