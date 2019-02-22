@@ -27,27 +27,24 @@ export default class Home extends React.Component {
     this.nextUser()
   }
 
-  componentWillUnmount = () => {
-    this.stopUserSound()
-  }
-
 
   nextUser = () =>  { //find next user to show while browsing
-    
     axios.get(`${BASE_URL}/users/next/${this.state.userId}`)
     .then(response => {
         this.setState({currentUser: response.data})
     })
     .then( () =>  { 
-        console.log('url from nextUser: ', this.state.currentUser.url); 
-        this.state.currentUser.url ? this.playUser(this.state.currentUser.url) : this.playUser(`https://s3-us-west-2.amazonaws.com/bandolier-tracks/elevator_music.mp3`)
+        // console.log('url from nextUser: ', this.state.currentUser.url); 
+        this.state.currentUser.url ? this.playUser(this.state.currentUser.url) 
+        : this.playUser(`https://s3-us-west-2.amazonaws.com/bandolier-tracks/elevator_music.mp3`) //elevator music if no track
      } )
     .catch(() => console.log('failed to get next user') )
   }
 
   judgeUser = (judgedId, status) => {
     axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: judgedId, status: status})
-    .then( () => { this.nextUser(); this.stopUserSound() })
+    .then(this.stopUserSound() ) //these used to be together on a line (nextUser first)
+    .then(this.nextUser())
     .catch(() => console.log('failed to play user'))
   }
 
@@ -75,21 +72,38 @@ export default class Home extends React.Component {
   //   .catch( () => console.log('could not play async')) 
   // }
 
+  // playUser = async (url) => {
+  //   console.log('url given to playUser', url)
+  //   this.state.userSound = new Audio.Sound();
+  //   try {
+  //     await this.state.userSound.loadAsync({uri: url});
+  //     console.log('url after load', url)
+  //     await this.state.userSound.playAsync();
+      
+  //   }
+  //   catch (error) {
+  //      console.log(error)
+  //   }
+  // }
+
   playUser = async (url) => {
     console.log('url given to playUser', url)
     this.state.userSound = new Audio.Sound();
-    try {
-      await this.state.userSound.loadAsync({uri: url});
-      await this.state.userSound.playAsync();
-    }
-    catch (error) {
-       console.log(error)
-    }
+      
+    await this.state.userSound.loadAsync({uri: url})
+
+    .then( () => this.state.userSound.playAsync() )
+    .then(() =>     console.log('url after load', url))
+    .catch (error => console.log(error) )
+    
   }
+  
   
 
   stopUserSound = async () => {
-   this.state.userSound.stopAsync()
+  //  this.state.userSound.stopAsync() 
+  //  this.setState({userSound: null}) 
+   await this.state.userSound.unloadAsync()
   }
 
 
