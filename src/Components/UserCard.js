@@ -50,11 +50,14 @@ export default class UserCard extends React.Component {
 
     return (
     
-      <View style={styles.profileInner}>  
+      <View style={styles.profileInner}> 
+  
         <Image
           style={styles.profilePic}
           source={{uri: this.props.user.img_url}}
           />
+
+
         <View style={styles.nameMatchBar}>
           <Text style={styles.profileTextName}>{this.props.user.username}</Text>
           <Text style={styles.profileTextName}>{this.props.user.match}</Text>
@@ -85,6 +88,9 @@ export default class UserCard extends React.Component {
           </View>
         </View>
 
+ 
+
+
         <Text style={styles.profileTextSectionHead}>Heroes </Text>
         <Text>{this.props.user.heroes}</Text>
 
@@ -92,10 +98,21 @@ export default class UserCard extends React.Component {
         <Text>{this.props.user.influences}</Text>
 
         <Text style={styles.profileTextSectionHead}>Bio</Text>
-        <Text>{this.props.user.bio}</Text>
-       
+        <Text>{this.props.user.bio}</Text>   
+
+
+
+    
+
+
+
 
       </View>  
+
+
+
+
+
     )
   }
 

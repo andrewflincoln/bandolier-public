@@ -72,7 +72,7 @@ export default class Home extends React.Component {
   //   .catch( () => console.log('could not play async')) 
   // }
 
-  // playUser = async (url) => {
+  // playUser = async (url) => {                    //await & then versions seem to work the same
   //   console.log('url given to playUser', url)
   //   this.state.userSound = new Audio.Sound();
   //   try {

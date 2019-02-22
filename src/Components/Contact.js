@@ -16,6 +16,7 @@ const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 export default class Contact extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
       userId: 0,// 
       messages: [],
@@ -35,7 +36,7 @@ export default class Contact extends React.Component {
     // if (this.props.navigation.getParam('userId')) {
     //    this.setState({userId: this.props.navigation.getParam('userId')}) //gets param but won't set state
     // }   
-    if (this.props.navigation.getParam('chatUser')) { //check if taken here from user page
+    if (this.props.navigation.getParam('chatUser')) { //if taken here from user page, go straight to their convo
       this.goToChat(this.props.navigation.getParam('chatUser').id) //this pulls down the user but already have them here. could cut down.
     }
     console.log(this.props.navigation.getParam('userId'), this.state.userId)
@@ -49,7 +50,7 @@ export default class Contact extends React.Component {
       'keyboardDidHide',
       this._keyboardDidHide,
     );
-    // this.props.navigation.addListener('willFocus', this.getConvos) //refresh on each view?
+    // this.props.navigation.addListener('willFocus', this.getConvos) //refresh on each view -- needs to auto scroll to bottom
   }
   _keyboardDidShow= () =>  {
     this.setState({keysUp: true})
@@ -82,6 +83,8 @@ export default class Contact extends React.Component {
     .catch(() => console.log('could not send message'))
 
     this.goToChat(this.state.chatter.id)
+
+
 
   }
 
