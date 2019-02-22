@@ -102,11 +102,6 @@ export default class UserCard extends React.Component {
 
 
 
-    
-
-
-
-
       </View>  
 
 

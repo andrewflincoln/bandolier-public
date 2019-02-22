@@ -113,6 +113,11 @@ const styles = StyleSheet.create({
     paddingRight: 30,
     justifyContent: 'flex-end'
   }, 
+  tickerInner: {
+    backgroundColor: 'black',
+    fontSize: 16,
+    color: 'white'
+  },
 
   navBar: {
     backgroundColor: 'black',

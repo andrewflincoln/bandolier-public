@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View, ImageBackground, Image, Button, ScrollView} from 'react-native'
+import {Text, View, ImageBackground, Image, Button, ScrollView, TouchableOpacity} from 'react-native'
 import axios from 'axios'
 import styles from '../styles'
 import UserCard from './UserCard'
@@ -48,6 +48,11 @@ export default class Home extends React.Component {
     .catch(() => console.log('failed to play user'))
   }
 
+
+
+
+
+
   navPlaylist = () => {
     this.props.navigation.navigate('Playlist')
   }
@@ -63,8 +68,8 @@ export default class Home extends React.Component {
   navContact= () => {
     this.props.navigation.navigate('Contact', {userId: this.state.userId})
   }
-  navProfile= () => {
-    this.props.navigation.navigate('MyProfile', {userId: this.state.userId})
+  navProfile = () => {
+    this.props.navigation.navigate('MyProfile', {userId: this.state.userId})  
   }
 
   // playItSam = async () => {
@@ -87,13 +92,10 @@ export default class Home extends React.Component {
   // }
 
   playUser = async (url) => {
-    console.log('url given to playUser', url)
     this.state.userSound = new Audio.Sound();
       
     await this.state.userSound.loadAsync({uri: url})
-
     .then( () => this.state.userSound.playAsync() )
-    .then(() =>     console.log('url after load', url))
     .catch (error => console.log(error) )
     
   }
@@ -115,15 +117,20 @@ export default class Home extends React.Component {
       <ImageBackground source={require('../guitars/IMG_20190208_065249773_HDR.jpg')} style={styles.imgBG}>
 
         <View style={styles.profileBG}>
-          <NavBar
-            userId={this.state.userId}
-            navPlaylist={this.navPlaylist}
-            navQuestions={this.navQuestions}
-            navCreate={this.navCreate}
-            navSearch={this.navSearch}
-            navContact={this.navContact}
-            navProfile={this.navProfile}
-          />
+         
+         {/* double up touches to stop music */}
+
+            <NavBar
+              userId={this.state.userId}
+              navPlaylist={this.navPlaylist}
+              navQuestions={this.navQuestions}
+              navCreate={this.navCreate}
+              navSearch={this.navSearch}
+              navContact={this.navContact}
+              navProfile={this.navProfile}
+              stopUserSound={this.stopUserSound}
+            />
+ 
 
           <ScrollView style={styles.userCardScroll}>
             <UserCard
