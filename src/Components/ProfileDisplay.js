@@ -9,6 +9,8 @@ import NavBar from './NavBar'
 import UserCard from './UserCard'
 import attachHeader from './Home'
 
+import {Audio, SecureStore} from 'expo'
+
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
 
@@ -18,9 +20,9 @@ export default class ProfileDisplay extends React.Component {
 
     this.state= {
       userId: 0,   //'',
-      viewId: 0,
       currentUser: {},
-      barType: ''
+      barType: '',
+      playing: false
       
     }
   }
@@ -29,35 +31,53 @@ export default class ProfileDisplay extends React.Component {
     this.setState({userId: this.props.navigation.getParam('userId')})
   }
   componentDidMount = () => {
-    this.setUser()
-    this.props.navigation.addListener('willFocus', this.setUser)
-   
+    this.getUser(this.props.navigation.getParam('viewUserId'))
+    this.props.navigation.addListener('willFocus', this.getUser)
   }
 
-  setUser = () => {
-    this.setState({currentUser: this.props.navigation.getParam('viewUser'), barType: this.props.navigation.getParam('barType')})
-  }
-
-  getUser = () =>  { 
-    axios.get(`${BASE_URL}/users/${this.state.viewId}`, attachHeader()) 
+  getUser = (id) =>  { 
+    axios.get(`${BASE_URL}/users/${this.state.userId}/${id}`) 
     .then(response => {
-        // console.log(JSON.stringify(response))
-        this.setState({currentUser: response.data[0]})
+        console.log(JSON.stringify(response))
+        this.setState({currentUser: response.data, barType: this.props.navigation.getParam('barType')})
     })
     .catch(() => console.log('failed to get user'))
   }
 
-  navGen = (toScreen) => {
-    this.props.navigation.navigate(toScreen, {userId: this.state.userId})
+  playUserSound = async (url) => {
+    console.log('url given to playUser', url)
+    this.state.profileSound = new Audio.Sound();
+      
+    await this.state.profileSound.loadAsync({uri: url})
+
+    .then( () => this.state.profileSound.playAsync() )
+    .then(() =>     console.log('url after load', url))
+    .catch (error => console.log('play user error: ', error) )
+
+    this.setState({playing: true})
   }
 
+  stopUserSound = async () => {
+    await this.state.profileSound.unloadAsync()
+    this.setState({playing: false})
+   }
+ 
+
+  navGen = (toScreen) => {
+    this.props.navigation.navigate(toScreen, {userId: this.state.userId})
+    if (this.state.playing)
+      this.stopUserSound()
+  }
+  
   contactUser = (chatterId) => {
     // this.navGen('Contact', {chatUser: user})
     this.props.navigation.navigate('Contact', {chatUser: chatterId, userId: this.state.userId})
+    if (this.state.playing)
+      this.stopUserSound()
   }
 
   addToPlaylist= (user) => { //2 function here could be one, depending how much gets added
-    axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: user, status: 'played'}, attachHeader())
+    axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: user, status: 'played'})
     .catch(() => console.log('failed to play user'))
     .then(() => {
       this.state.barType === 'search' ?  this.navGen('SearchPage')
@@ -67,12 +87,13 @@ export default class ProfileDisplay extends React.Component {
 
   stopUser = (user) => {
     this.unList(user)
-    axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: user, status: 'stopped'}, attachHeader())
+    axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: user, status: 'stopped'})
     .catch(() => console.log('failed to stop user'))
     .then(() => {
       this.state.barType === 'search' ?  this.navGen('SearchPage')
       : this.navGen('Playlist')
     })
+    
   }
 
   unList = (user2) => {
@@ -102,28 +123,48 @@ console.log('userid on profile display: ', this.state.userId)
             />
           
           </ScrollView>
-        
+
+
+
+          {
+          !this.state.playing ? 
+          <Button
+            title={`Play " ${this.state.currentUser.title}"`} 
+            onPress={() => this.playUserSound(this.state.currentUser.url)}
+          />
+          : 
+          <Button
+            title='Stop'
+            onPress = {() => this.stopUserSound() }
+          />
+
+          }
+
+
+
+
+
         {
 
         this.state.barType === 'playlist' ? 
         <PlaylistBar //conditional bars
-        setUser={this.setUser}
+          setUser={this.setUser}
+          navGen={this.navGen}
           user={this.state.currentUser}
           unList={this.unList}
           stopUser={this.stopUser}
           contactUser={this.contactUser}
-          navGen={this.navGen}
+        
         
         />
         : 
         <SearchedBar 
-        setUser={this.setUser}
+          setUser={this.setUser}
           navGen={this.navGen}
           user={this.state.currentUser}
           stopUser={this.stopUser}
           addToPlaylist={this.addToPlaylist}
           contactUser={this.contactUser}
-          navSearch={this.navSearch}
           unList={this.unList}
         />
 

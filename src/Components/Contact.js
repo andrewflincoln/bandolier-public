@@ -74,7 +74,7 @@ export default class Contact extends React.Component {
     .catch(() => console.log('failed to get messages'))
 
     axios.get(`${BASE_URL}/users/${user2}`)
-    .then(response => this.setState({chatter: response.data[0]}))
+    .then(response => this.setState({chatter: response.data})) //removed [0] here after & fix
     .then(() => console.log('chatter: ', this.state.chatter.id))
   }
 

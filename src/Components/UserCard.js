@@ -12,41 +12,8 @@ export default class UserCard extends React.Component {
     }
   }
 
-  // componentDidMount() {
-  //   console.log(this.props.user.url, this.props.user.username)
-  //   this.playUser(this.props.user.url)
-  // }
-
-  // componentWillUnmount() {
-  //   console.log('unmounting and hopefully stopping track')
-  //   this.state.userSound.stopAsync()
-  // }
-
-  // playUser = async (url) => {
-  //   this.state.userSound = new Audio.Sound();
-  //   try {
-  //     await this.state.userSound.loadAsync({uri: url});
-  //     await this.state.userSound.playAsync();
-  //   }
-  //   catch (error) {
-  //      console.log(url, error)
-  //   }
-  // }
-  // playUser = async (url) => {
-  //   soundObject= new Audio.Sound();
-  //   try {
-  //     await soundObject.loadAsync({uri: url});
-  //     await soundObject.playAsync();
-  //   }
-  //   catch (error) {
-  //      console.log(url, error)
-  //   }
-  // }
   render() {
-    // console.log('url received via props: ', this.props.user.url)
-    // this.props.user.url ? 
-    // this.playUser(this.props.user.url) //working, avoids "null source" error
-    // : null 
+  
 
     return (
     

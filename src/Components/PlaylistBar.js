@@ -18,8 +18,8 @@ function PlaylistBar(props) {
       <TouchableOpacity onPress={() => props.stopUser(props.user.id)}>
         <IconF color="black" name="stop" size={25} />
       </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => props.unList(props.user.id)}>
+                                                  
+      <TouchableOpacity onPress={() => props.unList(props.user.id)}> 
         <IconM color="black" name="playlist-remove" size={25} />
       </TouchableOpacity>
 

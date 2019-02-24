@@ -30,9 +30,9 @@ export default class Home extends React.Component {
     this.nextUser()
   }
 
-  attachHeader = async () => {
+  attachHeader = () => {
     let bearer = ''
-    const token = await SecureStore.getItemAsync('token')
+    token = SecureStore.getItemAsync('token')
     // console.log('attaching token: ', token)
     if (token) bearer = `Bearer ${token}`
     console.log('attaching token: ', token)
@@ -46,7 +46,7 @@ export default class Home extends React.Component {
   }
 
   nextUser = () =>  { //find next user to show while browsing
-    axios.get(`${BASE_URL}/users/next/${this.state.userId}`, this.attachHeader())
+    axios.get(`${BASE_URL}/users/next/${this.state.userId}`)
     .then(response => {
         this.setState({currentUser: response.data})
     })
@@ -59,8 +59,8 @@ export default class Home extends React.Component {
   }
 
   judgeUser = (judgedId, status) => {
-    axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: judgedId, status: status}, this.attachHeader())
-    // .then(this.stopUserSound() ) //these used to be together on a line (nextUser first)
+    axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: judgedId, status: status})
+    .then(this.stopUserSound() ) //these used to be together on a line (nextUser first)
     .then(this.nextUser())
     .catch(() => console.log('failed to play user'))
   }
@@ -69,8 +69,9 @@ export default class Home extends React.Component {
 
 
   navGen = (toScreen) => {
-    this.props.navigation.navigate(toScreen, {userId: this.state.userId})
     this.stopUserSound()
+    this.props.navigation.navigate(toScreen, {userId: this.state.userId})
+    
   }
 
 
@@ -90,6 +91,7 @@ export default class Home extends React.Component {
 
   stopUserSound = async () => {
    await this.state.userSound.unloadAsync()
+   .catch('could not unload from home')
   }
 
 

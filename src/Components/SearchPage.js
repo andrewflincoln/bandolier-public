@@ -40,11 +40,11 @@ export default class SearchPage extends React.Component {
   handleSubmit = () => {
     const searchUser = {...this.state} 
 
-    axios.post(`${BASE_URL}/users/search`, searchUser, attachHeader())
+    axios.post(`${BASE_URL}/users/search`, searchUser)
     .then(response => {
         this.setState({foundUsers: response.data.rows, hideSearch: true})
     }) 
-    .catch(() => console.log('failed to create'))
+    .catch(() => console.log('failed to search'))
   }
 
   resetForm = () => {
@@ -53,7 +53,7 @@ export default class SearchPage extends React.Component {
 
   goToProfile = (user) => {
     console.log('user passed: ' + JSON.stringify(user))
-    this.props.navigation.navigate('ProfileDisplay', {viewUser: user, barType: 'search', userId: this.state.userId})
+    this.props.navigation.navigate('ProfileDisplay', {viewUserId: user.id, barType: 'search', userId: this.state.userId})
   }
 
   navGen = (toScreen) => {

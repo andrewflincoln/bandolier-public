@@ -24,7 +24,6 @@ export default class MyProfile extends React.Component {
     }
   }
 
-
   componentWillMount = () => {
     this.setState({userId: this.props.navigation.getParam('userId')})
   }
@@ -33,10 +32,10 @@ export default class MyProfile extends React.Component {
     this.getUser()
   }
   getUser = () =>  { 
-    axios.get(`${BASE_URL}/users/${this.state.userId}`, attachHeader()) 
+    axios.get(`${BASE_URL}/users/${this.state.userId}/${this.state.userId}`, attachHeader()) //should be a "self route" but this works!
     .then(response => {
         // console.log(JSON.stringify(response))
-        this.setState({currentUser: response.data[0]})
+        this.setState({currentUser: response.data})
     })
     .catch(() => console.log('failed to get user'))
   }
@@ -66,14 +65,10 @@ export default class MyProfile extends React.Component {
           />
 
           <View style={styles.myProfileHeadlineView}>
-          <Text style={styles.myProfileHeadlineText}>Bob's Profile</Text>
+          <Text style={styles.myProfileHeadlineText}>Your Profile</Text>
           </View>
           
           <ScrollView style={styles.userCardScroll}>
-
-
-
-
 
             <View style={styles.profileInner}>  
               <Image

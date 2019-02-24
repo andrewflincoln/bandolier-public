@@ -33,18 +33,18 @@ export default class Playlist extends React.Component {
 
   getPlaylist = () => {
     console.log('starting get playlist')
-    axios.get(`${BASE_URL}/relations/playlist/${this.state.userId}`, attachHeader())
+    axios.get(`${BASE_URL}/relations/playlist/${this.state.userId}`)
     .then(response => this.setState({listUsers: response.data.rows}))
   }
 
   navGen = (toScreen) => {
-    this.props.navigation.navigate(toScreen, {userId: this.state.userId})
+    this.props.navigation.navigate(toScreen, {userId: this.state.userId, })
   }
   
 
   goToProfile = (user) => {
     console.log('user passed: ' + JSON.stringify(user))
-    this.props.navigation.navigate('ProfileDisplay', {viewUser: user, barType: 'playlist', userId: this.state.userId})
+    this.props.navigation.navigate('ProfileDisplay', {viewUserId: user.id, barType: 'playlist', userId: this.state.userId})
   }
 
  
