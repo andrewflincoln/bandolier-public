@@ -6,7 +6,7 @@ import UserCard from './UserCard'
 import PlayBar from './PlayBar'
 import NavBar from './NavBar'
 
-import {Audio} from 'expo'
+import {Audio, SecureStore} from 'expo'
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
@@ -16,20 +16,37 @@ export default class Home extends React.Component {
     super(props)
 
     this.state= {
-      userId: 2,   //'',
+      userId: 0,   //'',
       currentUser: {},
       recents: [],
 
     }
   }
 
-  componentWillMount = () => {
+  componentWillMount = async () => { //sync issues here?
+    this.setState({userId: this.props.navigation.getParam('userId')})
+  }
+  componentDidMount = () => {
     this.nextUser()
   }
 
+  attachHeader = async () => {
+    let bearer = ''
+    const token = await SecureStore.getItemAsync('token')
+    // console.log('attaching token: ', token)
+    if (token) bearer = `Bearer ${token}`
+    console.log('attaching token: ', token)
+    return {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': bearer
+      }
+    }
+  }
 
   nextUser = () =>  { //find next user to show while browsing
-    axios.get(`${BASE_URL}/users/next/${this.state.userId}`)
+    axios.get(`${BASE_URL}/users/next/${this.state.userId}`, this.attachHeader())
     .then(response => {
         this.setState({currentUser: response.data})
     })
@@ -42,8 +59,8 @@ export default class Home extends React.Component {
   }
 
   judgeUser = (judgedId, status) => {
-    axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: judgedId, status: status})
-    .then(this.stopUserSound() ) //these used to be together on a line (nextUser first)
+    axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: judgedId, status: status}, this.attachHeader())
+    // .then(this.stopUserSound() ) //these used to be together on a line (nextUser first)
     .then(this.nextUser())
     .catch(() => console.log('failed to play user'))
   }
@@ -57,59 +74,27 @@ export default class Home extends React.Component {
   }
 
 
-  // navQuestions = () => {
-  //   this.props.navigation.navigate('Questions')
-  // }
-  // navCreate = () => {
-  //   this.props.navigation.navigate('Create')
-  // }
-  // navSearch= () => {
-  //   this.props.navigation.navigate('SearchPage')
-  // }
-  // navContact= () => {
-  //   this.props.navigation.navigate('Contact', {userId: this.state.userId})
-  // }
-  // navProfile= () => {
-  //   this.props.navigation.navigate('MyProfile', {userId: this.state.userId})
-  // }
-
-
-  // playUser = async (url) => {                    //try/await vs .then -- no difference? occasionally change mind.
-  //   console.log('url given to playUser', url)
-  //   this.state.userSound = new Audio.Sound();
-  //   try {
-  //     await this.state.userSound.loadAsync({uri: url});
-  //     console.log('url after load', url)
-  //     await this.state.userSound.playAsync();
-      
-  //   }
-  //   catch (error) {
-  //      console.log(error)
-  //   }
-  // }
-
   playUser = async (url) => {
-    console.log('url given to playUser', url)
+    // console.log('url given to playUser', url)
     this.state.userSound = new Audio.Sound();
       
     await this.state.userSound.loadAsync({uri: url})
 
     .then( () => this.state.userSound.playAsync() )
-    .then(() =>     console.log('url after load', url))
-    .catch (error => console.log(error) )
+    // .then(() =>     console.log('url after load', url))
+    .catch (error => console.log('play user error: ', error) )
     
   }
   
   
 
   stopUserSound = async () => {
-  //  this.state.userSound.stopAsync() 
-  //  this.setState({userSound: null}) 
    await this.state.userSound.unloadAsync()
   }
 
 
   render() {
+    console.log('userid contact: '+ this.state.userId)
     const {navigate} = this.props.navigation
     return (
 
@@ -120,12 +105,6 @@ export default class Home extends React.Component {
           <NavBar
             navGen={this.navGen}
             userId={this.state.userId}
-            navPlaylist={this.navPlaylist}
-            navQuestions={this.navQuestions}
-            navCreate={this.navCreate}
-            navSearch={this.navSearch}
-            navContact={this.navContact}
-            navProfile={this.navProfile}
           />
 
           <ScrollView style={styles.userCardScroll}>

@@ -11,7 +11,7 @@ function SearchedBar(props) {
    
     <View style={styles.playBar}>
 
-      <TouchableOpacity onPress={props.navSearch}>
+      <TouchableOpacity onPress={() => props.navGen('SearchPage')}>
         <IconM color="black" name="skip-previous" size={55} />
       </TouchableOpacity>
       
@@ -23,7 +23,7 @@ function SearchedBar(props) {
         <IconF color="black" name="play" size={35} />
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => props.contactUser(props.user)}>
+      <TouchableOpacity onPress={() => props.contactUser(props.user.id)}>
         <IconM color="black" name="radio-tower" size={35} />
       </TouchableOpacity>
 

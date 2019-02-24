@@ -3,6 +3,7 @@ import {Text, View, TouchableOpacity, ImageBackground} from 'react-native'
 import styles from '../styles'
 import axios from 'axios'
 import NavBar from './NavBar'
+import attachHeader from './Home'
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
@@ -10,18 +11,19 @@ export default class Questions extends React.Component {
   constructor(props) {
     super(props)
     this.state={
-      userId: 2,
+      userId: 0,
       currentQ: {},
       answer: 0,
     }
   }
 
   componentWillMount() {
+    this.setState({userId: this.props.navigation.getParam('userId')})
     this.getNextQuestion()
   }
 
   getNextQuestion = () =>  { //sometimes getting a 304 error here (but not on Postman)
-    axios.get(`${BASE_URL}/questions/next/${this.state.userId}`)
+    axios.get(`${BASE_URL}/questions/next/${this.state.userId}`, attachHeader() )
     .then(response => {
         this.setState({currentQ: response.data})
     })
@@ -31,7 +33,7 @@ export default class Questions extends React.Component {
   }
 
   submitAnswer = () => { //this works flawlessly, including the invocation of the above function
-    axios.post(`${BASE_URL}/questions`, {userId: this.state.userId, questionId: this.state.currentQ.id, answer: this.state.answer})
+    axios.post(`${BASE_URL}/questions`, {userId: this.state.userId, questionId: this.state.currentQ.id, answer: this.state.answer}, attachHeader())
     .then(this.getNextQuestion())
   }
 
@@ -42,6 +44,7 @@ export default class Questions extends React.Component {
 
 
   render() {
+    console.log('userid qs: '+ this.state.userId)
     const q = this.state.currentQ
     return (
 

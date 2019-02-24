@@ -11,7 +11,7 @@ function PlaylistBar(props) {
     
     <View style={styles.playBar}>
 
-      <TouchableOpacity onPress={props.navPlaylist}>
+      <TouchableOpacity onPress={() => props.navGen('Playlist')}>
         <IconM color="black" name="skip-previous" size={55} />
       </TouchableOpacity>
       
@@ -23,7 +23,7 @@ function PlaylistBar(props) {
         <IconM color="black" name="playlist-remove" size={25} />
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => props.contactUser(props.user)}>
+      <TouchableOpacity onPress={() => props.contactUser(props.user.id)}>
         <IconM color="black" name="radio-tower" size={35} />
       </TouchableOpacity>
 

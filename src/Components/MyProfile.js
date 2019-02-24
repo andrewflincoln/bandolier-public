@@ -8,6 +8,7 @@ import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
 import ProfileBar from './ProfileBar'
 import NavBar from './NavBar'
 import UserCard from './UserCard'
+import attachHeader from './Home'
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
@@ -16,7 +17,7 @@ export default class MyProfile extends React.Component {
     super(props)
 
     this.state= {
-      userId: 2,   //'',
+      userId: 0,   //'',
 
       currentUser: {},
       
@@ -24,15 +25,15 @@ export default class MyProfile extends React.Component {
   }
 
 
-  // componentWillMount = () => {
-  //   this.setState({userId: this.props.navigation.getParam('userId')})
-  // }
+  componentWillMount = () => {
+    this.setState({userId: this.props.navigation.getParam('userId')})
+  }
   componentDidMount = () => {
+
     this.getUser()
-    // this.props.navigation.addListener('willFocus', this.setUser)
   }
   getUser = () =>  { 
-    axios.get(`${BASE_URL}/users/${this.state.userId}`) 
+    axios.get(`${BASE_URL}/users/${this.state.userId}`, attachHeader()) 
     .then(response => {
         // console.log(JSON.stringify(response))
         this.setState({currentUser: response.data[0]})
@@ -51,7 +52,7 @@ export default class MyProfile extends React.Component {
  
 
   render() {
-
+    console.log('userid myprofile: '+ this.state.userId)
 
     const {navigate} = this.props.navigation
     const user = this.state.currentUser

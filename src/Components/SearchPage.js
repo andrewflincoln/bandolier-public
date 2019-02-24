@@ -6,6 +6,7 @@ import styles from '../styles'
 import PlayBar from './PlayBar'
 import NavBar from './NavBar'
 import SearchListRow from './SearchListRow'
+import attachHeader from './Home'
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
@@ -13,7 +14,7 @@ export default class SearchPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {   
-      userId: 2,
+      userId: 0,
       
       genre_1: '',
       instr_1: '',
@@ -32,14 +33,15 @@ export default class SearchPage extends React.Component {
   }
 
 
-
+  componentDidMount() { //changed from Will for error fix
+    this.setState({userId: this.props.navigation.getParam('userId')})
+  }
 
   handleSubmit = () => {
     const searchUser = {...this.state} 
 
-    axios.post(`${BASE_URL}/users/search`, searchUser)
+    axios.post(`${BASE_URL}/users/search`, searchUser, attachHeader())
     .then(response => {
-        console.log(JSON.stringify(response.data.rows))
         this.setState({foundUsers: response.data.rows, hideSearch: true})
     }) 
     .catch(() => console.log('failed to create'))
@@ -51,7 +53,7 @@ export default class SearchPage extends React.Component {
 
   goToProfile = (user) => {
     console.log('user passed: ' + JSON.stringify(user))
-    this.props.navigation.navigate('ProfileDisplay', {viewUser: user, barType: 'search'})
+    this.props.navigation.navigate('ProfileDisplay', {viewUser: user, barType: 'search', userId: this.state.userId})
   }
 
   navGen = (toScreen) => {
@@ -61,6 +63,7 @@ export default class SearchPage extends React.Component {
  
 
   render() {
+    console.log('userid on search ', this.state.userId)
     const {navigate} = this.props.navigation
     return (
       <ImageBackground source={require('../guitars/IMG_20190208_065638226_HDR.jpg')} style={styles.imgBG}>
@@ -70,10 +73,7 @@ export default class SearchPage extends React.Component {
           navGen={this.navGen}
         />
       
-          
-
-
-
+        
         {this.state.hideSearch ? 
           <TouchableOpacity style={styles.searchModifyButton} onPress={() => this.setState({hideSearch: false})}>
             <Text style={styles.searchModifyText}>Search/Modify</Text>
@@ -164,9 +164,6 @@ export default class SearchPage extends React.Component {
             </View>
             
     
-
-
-
             <View>
               <Text style={styles.createHeaders}>Heroes</Text>
               <TextInput multi-line={true}

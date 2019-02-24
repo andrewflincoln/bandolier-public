@@ -7,6 +7,7 @@ import PlaylistBar from './PlaylistBar'
 import SearchedBar from './SearchedBar'
 import NavBar from './NavBar'
 import UserCard from './UserCard'
+import attachHeader from './Home'
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
@@ -16,26 +17,29 @@ export default class ProfileDisplay extends React.Component {
     super(props)
 
     this.state= {
-      userId: 2,   //'',
-      viewId: 1,
+      userId: 0,   //'',
+      viewId: 0,
       currentUser: {},
       barType: ''
       
     }
   }
 
+  componentWillMount = () => {
+    this.setState({userId: this.props.navigation.getParam('userId')})
+  }
   componentDidMount = () => {
     this.setUser()
     this.props.navigation.addListener('willFocus', this.setUser)
+   
   }
 
   setUser = () => {
     this.setState({currentUser: this.props.navigation.getParam('viewUser'), barType: this.props.navigation.getParam('barType')})
-    
   }
 
   getUser = () =>  { 
-    axios.get(`${BASE_URL}/users/${this.state.viewId}`) //might be props
+    axios.get(`${BASE_URL}/users/${this.state.viewId}`, attachHeader()) 
     .then(response => {
         // console.log(JSON.stringify(response))
         this.setState({currentUser: response.data[0]})
@@ -44,36 +48,44 @@ export default class ProfileDisplay extends React.Component {
   }
 
   navGen = (toScreen) => {
-    this.props.navigation.navigate(toScreen)
+    this.props.navigation.navigate(toScreen, {userId: this.state.userId})
   }
 
-  contactUser = (user) => {
-    this.props.navigation.navigate('Contact', {chatUser: user, userId: this.state.userId})
+  contactUser = (chatterId) => {
+    // this.navGen('Contact', {chatUser: user})
+    this.props.navigation.navigate('Contact', {chatUser: chatterId, userId: this.state.userId})
   }
-  addToPlaylist= (user, status) => { //2 function here could be one, depending how much gets added
-    axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: user, status: 'played'})
+
+  addToPlaylist= (user) => { //2 function here could be one, depending how much gets added
+    axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: user, status: 'played'}, attachHeader())
     .catch(() => console.log('failed to play user'))
-  }
-  stopUser = (user, status) => {
-    this.unList(user)
-    axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: user, status: 'stopped'})
-    .catch(() => console.log('failed to stop user'))
     .then(() => {
-      this.state.barType === 'search' ? this.navSearch()
-      : this.navPlaylist()
+      this.state.barType === 'search' ?  this.navGen('SearchPage')
+      : this.navGen('Playlist')
     })
   }
+
+  stopUser = (user) => {
+    this.unList(user)
+    axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: user, status: 'stopped'}, attachHeader())
+    .catch(() => console.log('failed to stop user'))
+    .then(() => {
+      this.state.barType === 'search' ?  this.navGen('SearchPage')
+      : this.navGen('Playlist')
+    })
+  }
+
   unList = (user2) => {
     console.log(this.state.userId, user2)
     axios.post(`${BASE_URL}/relations/alter`, {user_1: this.state.userId, user_2: user2})
-    .then(this.navPlaylist())
-    .catch(() => console.log('failed to remove user'))
+    .then(this.navGen('Playlist'))
   }
  
 
+
   render() {
 
-
+console.log('userid on profile display: ', this.state.userId)
     const {navigate} = this.props.navigation
     return (
       <ImageBackground source={require(`../guitars/fender_amp_grill.jpg`)} style={styles.imgBG}>
@@ -100,12 +112,13 @@ export default class ProfileDisplay extends React.Component {
           unList={this.unList}
           stopUser={this.stopUser}
           contactUser={this.contactUser}
-          navPlaylist={this.navPlaylist}
+          navGen={this.navGen}
         
         />
         : 
         <SearchedBar 
         setUser={this.setUser}
+          navGen={this.navGen}
           user={this.state.currentUser}
           stopUser={this.stopUser}
           addToPlaylist={this.addToPlaylist}

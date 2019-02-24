@@ -46,35 +46,12 @@ export default class Login extends React.Component {
       this.setState({showError: false})
 
       SecureStore.setItemAsync('token', response.data.token)
+      // SecureStore.setItemAsync('id', response.data.user.id)
       SecureStore.getItemAsync('token').then(testresult => { (console.log('token stored as ' + testresult )) })  //check
+      // SecureStore.getItemAsync('id').then(testresult => { (console.log('id stored as ' + testresult + typeof(testresult) )) })  //check
+
   
-      this.props.navigation.navigate('UserProfile') 
-
-//getting tokens but not getting authentication 
-
-//return login request
-      // SecureStore.getItemAsync('token')
-      // .then( token => { 
-      //   console.log('token for id: ' + token)     
-      //     return axios(`https://quiet-garden-92157.herokuapp.com/login`), {
-      //       method: 'get',
-      //       headers: {
-      //         'Content-Type': 'application/json',
-      //         'Accept': 'application/json',
-      //         'Authorization': token ? `Bearer ${token}` : ''
-      //       },
-      //       data: null
-            
-      //     }
-          
-      // })
-      // .then(response => { 
-      //   console.log('response data ' + JSON.stringify(response))
-      //   SecureStore.setItemAsync('userId', JSON.stringify(response.data.id))
-      //   this.props.navigation.navigate('UserProfile', {'userId': response.data.id})
- 
-      // })
-
+      this.props.navigation.navigate('Home', {userId: response.data.user.id}) //logging in and getting to home page, need id 
 //return login request
     })
     .catch(error => {

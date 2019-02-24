@@ -6,19 +6,26 @@ import PlaylistRow from './PlaylistRow'
 import styles from '../styles'
 import axios from 'axios';
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
+import attachHeader from './Home'
+
 
 export default class Playlist extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: 2,// '',
+
       listUsers:  [],
 
       
     }
   }
 
+
+  componentWillMount = () => {
+    this.setState({userId: this.props.navigation.getParam('userId')})
+  }
   componentDidMount = () => {
+
     this.getPlaylist()
     this.props.navigation.addListener('willFocus', this.getPlaylist) //
   }
@@ -26,7 +33,7 @@ export default class Playlist extends React.Component {
 
   getPlaylist = () => {
     console.log('starting get playlist')
-    axios.get(`${BASE_URL}/relations/playlist/${this.state.userId}`)
+    axios.get(`${BASE_URL}/relations/playlist/${this.state.userId}`, attachHeader())
     .then(response => this.setState({listUsers: response.data.rows}))
   }
 
@@ -37,12 +44,13 @@ export default class Playlist extends React.Component {
 
   goToProfile = (user) => {
     console.log('user passed: ' + JSON.stringify(user))
-    this.props.navigation.navigate('ProfileDisplay', {viewUser: user, barType: 'playlist'})
+    this.props.navigation.navigate('ProfileDisplay', {viewUser: user, barType: 'playlist', userId: this.state.userId})
   }
 
  
 
   render() {
+    console.log('userid playlist: '+ this.state.userId)
     const {navigate} = this.props.navigation
     return (
       <ImageBackground source={require('../guitars/IMG_20190208_070218915_HDR.jpg')} style={styles.imgBG}>
