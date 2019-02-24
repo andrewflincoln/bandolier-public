@@ -54,21 +54,10 @@ export default class SearchPage extends React.Component {
     this.props.navigation.navigate('ProfileDisplay', {viewUser: user, barType: 'search'})
   }
 
-  navPlaylist = () => {
-    this.props.navigation.navigate('Playlist')
+  navGen = (toScreen) => {
+    this.props.navigation.navigate(toScreen, {userId: this.state.userId})
   }
-  navQuestions = () => {
-    this.props.navigation.navigate('Questions')
-  }
-  navCreate = () => {
-    this.props.navigation.navigate('Create')
-  }
-  navHome= () => {
-    this.props.navigation.navigate('Home')
-  }
-  navContact= () => {
-    this.props.navigation.navigate('Contact', {userId: this.state.userId})
-  }
+  
  
 
   render() {
@@ -78,11 +67,7 @@ export default class SearchPage extends React.Component {
         <View style={styles.searchBG}>
         <NavBar
           userId={this.state.userId}
-          navPlaylist={this.navPlaylist}
-          navQuestions={this.navQuestions}
-          navCreate={this.navCreate}
-          navHome={this.navHome}
-          navContact={this.navContact}
+          navGen={this.navGen}
         />
       
           

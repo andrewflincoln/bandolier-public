@@ -30,21 +30,10 @@ export default class Playlist extends React.Component {
     .then(response => this.setState({listUsers: response.data.rows}))
   }
 
-  navHome = () => {//prop function for navbar
-    this.props.navigation.navigate('Home')
+  navGen = (toScreen) => {
+    this.props.navigation.navigate(toScreen, {userId: this.state.userId})
   }
-  navQuestions = () => {
-    this.props.navigation.navigate('Questions')
-  }
-  navSearch= () => {
-    this.props.navigation.navigate('SearchPage')
-  }
-  navContact= () => {
-    this.props.navigation.navigate('Contact', {userId: this.state.userId})
-  }
-  navProfile= () => {
-    this.props.navigation.navigate('MyProfile', {userId: this.state.userId})
-  }
+  
 
   goToProfile = (user) => {
     console.log('user passed: ' + JSON.stringify(user))
@@ -59,11 +48,7 @@ export default class Playlist extends React.Component {
       <ImageBackground source={require('../guitars/IMG_20190208_070218915_HDR.jpg')} style={styles.imgBG}>
         <View style={styles.playlistView}>  
           <NavBar
-            navHome={this.navHome}
-            navQuestions={this.navQuestions}
-            navSearch={this.navSearch}
-            navContact={this.navContact}
-            navProfile={this.navProfile}
+            navGen={this.navGen}
             userId = {this.state.userId}
         
           />

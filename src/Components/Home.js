@@ -48,31 +48,33 @@ export default class Home extends React.Component {
     .catch(() => console.log('failed to play user'))
   }
 
-  navPlaylist = () => {
-    this.props.navigation.navigate('Playlist')
-  }
-  navQuestions = () => {
-    this.props.navigation.navigate('Questions')
-  }
-  navCreate = () => {
-    this.props.navigation.navigate('Create')
-  }
-  navSearch= () => {
-    this.props.navigation.navigate('SearchPage')
-  }
-  navContact= () => {
-    this.props.navigation.navigate('Contact', {userId: this.state.userId})
-  }
-  navProfile= () => {
-    this.props.navigation.navigate('MyProfile', {userId: this.state.userId})
+
+
+
+  navGen = (toScreen) => {
+    this.props.navigation.navigate(toScreen, {userId: this.state.userId})
+    this.stopUserSound()
   }
 
-  // playItSam = async () => {
-  //  this.state.currentSound.playAsync()
-  //   .catch( () => console.log('could not play async')) 
+
+  // navQuestions = () => {
+  //   this.props.navigation.navigate('Questions')
+  // }
+  // navCreate = () => {
+  //   this.props.navigation.navigate('Create')
+  // }
+  // navSearch= () => {
+  //   this.props.navigation.navigate('SearchPage')
+  // }
+  // navContact= () => {
+  //   this.props.navigation.navigate('Contact', {userId: this.state.userId})
+  // }
+  // navProfile= () => {
+  //   this.props.navigation.navigate('MyProfile', {userId: this.state.userId})
   // }
 
-  // playUser = async (url) => {
+
+  // playUser = async (url) => {                    //try/await vs .then -- no difference? occasionally change mind.
   //   console.log('url given to playUser', url)
   //   this.state.userSound = new Audio.Sound();
   //   try {
@@ -116,6 +118,7 @@ export default class Home extends React.Component {
 
         <View style={styles.profileBG}>
           <NavBar
+            navGen={this.navGen}
             userId={this.state.userId}
             navPlaylist={this.navPlaylist}
             navQuestions={this.navQuestions}

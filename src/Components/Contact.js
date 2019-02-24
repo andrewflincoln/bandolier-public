@@ -89,21 +89,10 @@ export default class Contact extends React.Component {
     this.setState({inChat: false})
   }
 
-  navHome = () => {//prop function for navbar
-    this.props.navigation.navigate('Home')
+  navGen = (toScreen) => {
+    this.props.navigation.navigate(toScreen, {userId: this.state.userId})
   }
-  navQuestions = () => {
-    this.props.navigation.navigate('Questions')
-  }
-  navSearch= () => {
-    this.props.navigation.navigate('SearchPage')
-  }
-  navPlaylist= () => {
-    this.props.navigation.navigate('Playlist')
-  }
-  navProfile= () => {
-    this.props.navigation.navigate('MyProfile', {userId: this.state.userId})
-  }
+  
 
   
 
@@ -114,11 +103,7 @@ export default class Contact extends React.Component {
       <ImageBackground source={require('../guitars/mic_tilt_left_big_low.jpg')} style={styles.imgBG}> 
         <View style={styles.playlistView}>  
           <NavBar
-            navHome={this.navHome}
-            navQuestions={this.navQuestions}
-            navSearch={this.navSearch}
-            navPlaylist={this.navPlaylist}
-            navProfile={this.navProfile}
+            navGen={this.navGen}
             userId = {this.state.userId}
           />
 

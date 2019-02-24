@@ -43,25 +43,10 @@ export default class ProfileDisplay extends React.Component {
     .catch(() => console.log('failed to get user'))
   }
 
-  navPlaylist = () => {
-    this.props.navigation.navigate('Playlist')
+  navGen = (toScreen) => {
+    this.props.navigation.navigate(toScreen)
   }
-  navQuestions = () => {
-    this.props.navigation.navigate('Questions')
-  }
-  navCreate = () => {
-    this.props.navigation.navigate('Create')
-  }
-  navSearch= () => {
-    this.props.navigation.navigate('SearchPage')
-  }
-  navContact= () => {
-    this.props.navigation.navigate('Contact', {userId: this.state.userId})
-  }
-  navHome= () => {
-    this.props.navigation.navigate('Home')
-  }
- 
+
   contactUser = (user) => {
     this.props.navigation.navigate('Contact', {chatUser: user, userId: this.state.userId})
   }
@@ -95,11 +80,7 @@ export default class ProfileDisplay extends React.Component {
         <View style={styles.profileBG}>
           <NavBar
             userId={this.state.userId}
-            navPlaylist={this.navPlaylist}
-            navQuestions={this.navQuestions}
-            navCreate={this.navCreate}
-            navSearch={this.navSearch}
-            navContact={this.navContact}
+            navGen={this.navGen}
             setUser = {this.setUser}
           />
 

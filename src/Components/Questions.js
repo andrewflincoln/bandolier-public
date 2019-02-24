@@ -35,22 +35,9 @@ export default class Questions extends React.Component {
     .then(this.getNextQuestion())
   }
 
-  navHome = () => {//prop function for navbar
-    this.props.navigation.navigate('Home')
+  navGen = (toScreen) => {
+    this.props.navigation.navigate(toScreen, {userId: this.state.userId})
   }
-  navPlaylist = () => {
-    this.props.navigation.navigate('Playlist')
-  }
-  navSearch= () => {
-    this.props.navigation.navigate('SearchPage')
-  }
-  navContact= () => {
-    this.props.navigation.navigate('Contact', {userId: this.state.userId})
-  }
-  navProfile= () => {
-    this.props.navigation.navigate('MyProfile', {userId: this.state.userId})
-  }
-  
   
 
 
@@ -63,11 +50,7 @@ export default class Questions extends React.Component {
 
       <NavBar
         userId={this.state.userId}
-        navPlaylist={this.navPlaylist}
-        navHome={this.navHome}
-        navContact={this.navContact}
-        navHome={this.navSearch}
-        navProfile={this.navProfile}
+        navGen={this.navGen}
 
       />
 

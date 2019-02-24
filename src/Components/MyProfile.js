@@ -40,27 +40,14 @@ export default class MyProfile extends React.Component {
     .catch(() => console.log('failed to get user'))
   }
 
-  navPlaylist = () => {
-    this.props.navigation.navigate('Playlist')
+  navGen = (toScreen) => {
+    this.props.navigation.navigate(toScreen, {userId: this.state.userId})
   }
-  navQuestions = () => {
-    this.props.navigation.navigate('Questions')
-  }
+  
   navCreate = () => {
-    this.props.navigation.navigate('Create')
+    this.props.navigation.navigate('Create') //
   }
-  navSearch= () => {
-    this.props.navigation.navigate('SearchPage')
-  }
-  navContact= () => {
-    this.props.navigation.navigate('Contact', {userId: this.state.userId})
-  }
-  navHome= () => {
-    this.props.navigation.navigate('Home')
-  }
-  navCreate = () => {
-    this.props.navigation.navigate('Create')
-  }
+
  
 
   render() {
@@ -73,17 +60,12 @@ export default class MyProfile extends React.Component {
         <View style={styles.profileBG}>
           <NavBar
             userId={this.state.userId}
-            navHome={this.navHome}
-            navPlaylist={this.navPlaylist}
-            navQuestions={this.navQuestions}
-            navCreate={this.navCreate}
-            navSearch={this.navSearch}
-            navContact={this.navContact}
+            navGen={this.navGen}
             setUser = {this.setUser}
           />
 
           <View style={styles.myProfileHeadlineView}>
-          <Text style={styles.myProfileHeadlineText}>Your Profile</Text>
+          <Text style={styles.myProfileHeadlineText}>Bob's Profile</Text>
           </View>
           
           <ScrollView style={styles.userCardScroll}>
