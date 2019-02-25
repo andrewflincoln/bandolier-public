@@ -96,7 +96,7 @@ export default class Home extends React.Component {
 
 
   render() {
-    console.log('userid contact: '+ this.state.userId)
+    console.log('userid radio: '+ this.state.userId)
     const {navigate} = this.props.navigation
     return (
 

@@ -46,13 +46,8 @@ export default class Login extends React.Component {
       this.setState({showError: false})
 
       SecureStore.setItemAsync('token', response.data.token)
-      // SecureStore.setItemAsync('id', response.data.user.id)
-      SecureStore.getItemAsync('token').then(testresult => { (console.log('token stored as ' + testresult )) })  //check
-      // SecureStore.getItemAsync('id').then(testresult => { (console.log('id stored as ' + testresult + typeof(testresult) )) })  //check
 
-  
-      this.props.navigation.navigate('Home', {userId: response.data.user.id}) //logging in and getting to home page, need id 
-//return login request
+      this.props.navigation.navigate('Home', {userId: response.data.user.id})
     })
     .catch(error => {
       console.log('caught after nav ' + error)
@@ -75,7 +70,7 @@ export default class Login extends React.Component {
             <Text style={styles.loginHeader}>Bandolier</Text>
             <Text style={styles.loginFormText}>Login email</Text>
             <TextInput
-              style={styles.loginFormText}
+              style={styles.createInput}
               placeholder='Email'
               value={this.state.email}
               onChangeText={(email) => this.setState({email})}
@@ -83,7 +78,8 @@ export default class Login extends React.Component {
 
             <Text style={styles.loginFormText}>Password</Text>
             <TextInput
-              style={styles.loginFormText}
+              style={styles.createInput}
+              secureTextEntry={true}
               placeholder='Password'
               value={this.state.password}
               onChangeText={(password) => this.setState({password})}
@@ -91,14 +87,23 @@ export default class Login extends React.Component {
 
             <Button
               title="Login"
+              color='#8EE8B9'
               onPress={this.handleSignIn}
               // onPress = {() => navigate('UserProfile')}
             />
 
             {
-              this.state.showError ? <Text>ERROR.</Text>
-              : <Text>No errors here, all good!</Text>
+              this.state.showError ? <Text>Sorry, that didn't work. Try again, or:</Text>
+              : null
             }
+
+          <Button
+              title="Join right now!"
+              text='black'
+              color='#8EE8B9'
+              onPress={() => this.props.navigation.navigate('Create')}
+              // onPress = {() => navigate('UserProfile')}
+            />
 
           </View>
 

@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     
     alignSelf: 'center',
     width: '80%',
-    backgroundColor: '#FFE4A0',
+    backgroundColor: '#FFF9CC',
     borderRadius: 15,
     padding: 10,
     zIndex: 2,
@@ -111,8 +111,11 @@ const styles = StyleSheet.create({
     height: 65,
     flexDirection: 'row',
     paddingRight: 30,
-    justifyContent: 'flex-end'
+    justifyContent: 'space-around'
   }, 
+  profileBarButton: {
+    alignItems: 'center'
+  },  
 
   navBar: {
     backgroundColor: 'black',
@@ -253,6 +256,7 @@ const styles = StyleSheet.create({
     // marginTop: 8
   },
   createInput: {
+    // height: 70,
     backgroundColor: 'white',
     marginBottom: 8
 

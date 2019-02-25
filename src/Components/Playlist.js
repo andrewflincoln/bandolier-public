@@ -6,7 +6,7 @@ import PlaylistRow from './PlaylistRow'
 import styles from '../styles'
 import axios from 'axios';
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
-import attachHeader from './Home'
+
 
 
 export default class Playlist extends React.Component {

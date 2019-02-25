@@ -11,9 +11,14 @@ function ProfileBar(props) {
    
     <View style={styles.profileBar}>
 
+      <TouchableOpacity style={styles.profileBarButton} onPress={() => props.signOut()}>
+        <IconM color="black" name="stop-circle" size={35} />
+        <Text>Log Out</Text>
+      </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => props.navCreate()}>
+      <TouchableOpacity style={styles.profileBarButton} onPress={() => props.navCreate()}>
         <IconM color="black" name="lead-pencil" size={35} />
+        <Text>Edit</Text>
       </TouchableOpacity>
 
  

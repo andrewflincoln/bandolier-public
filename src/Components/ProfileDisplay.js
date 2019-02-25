@@ -39,7 +39,7 @@ export default class ProfileDisplay extends React.Component {
     axios.get(`${BASE_URL}/users/${this.state.userId}/${id}`) 
     .then(response => {
         console.log(JSON.stringify(response))
-        this.setState({currentUser: response.data, barType: this.props.navigation.getParam('barType')})
+        this.setState({currentUser: response.data.rows[0], barType: this.props.navigation.getParam('barType')})
     })
     .catch(() => console.log('failed to get user'))
   }

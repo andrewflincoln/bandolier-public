@@ -33,8 +33,6 @@ export default class Contact extends React.Component {
 
   componentWillMount = () => {
     this.setState({userId: this.props.navigation.getParam('userId')})
-    // this.setState({ userId: SecureStore.getItemAsync('id') })
-
   }
   componentDidMount = () => {
     if (this.props.navigation.getParam('chatUser')) { //check if taken here from user page
@@ -62,25 +60,25 @@ export default class Contact extends React.Component {
   }
 
   getConvos = () => {
-    axios.get(`${BASE_URL}/messages/convos/${this.state.userId}`, attachHeader())
+    axios.get(`${BASE_URL}/messages/convos/${this.state.userId}`)
     .then(response => this.setState({convos: response.data}))
     .catch(() => console.log('failed to get convos'))
   }
   goToChat = (user2) => {
     console.log('starting get messages')
-    axios.get(`${BASE_URL}/messages/${this.state.userId}/${user2}`, attachHeader())
+    axios.get(`${BASE_URL}/messages/${this.state.userId}/${user2}`)
     .then(response => this.setState({messages: response.data.rows, inChat: true}))
     .then(() => console.log(this.state.messages))
     .catch(() => console.log('failed to get messages'))
 
-    axios.get(`${BASE_URL}/users/${user2}`)
-    .then(response => this.setState({chatter: response.data})) //removed [0] here after & fix
+    axios.get(`${BASE_URL}/users/${this.state.userId}/${user2}`)
+    .then(response => this.setState({chatter: response.data.rows[0]})) //added the 0 back...should really normalize these on backend
     .then(() => console.log('chatter: ', this.state.chatter.id))
   }
 
   postMessage = () => {
     const msg = {sender_id: this.state.userId, receiver_id: this.state.chatter.id, body: this.state.newMessage}
-    axios.post(`${BASE_URL}/messages`, msg, attachHeader())
+    axios.post(`${BASE_URL}/messages`, msg)
     .then(() => this.setState({newMessage: ''}))
     .catch(() => console.log('could not send message'))
     this.goToChat(this.state.chatter.id)
@@ -94,9 +92,6 @@ export default class Contact extends React.Component {
   navGen = (toScreen) => {
     this.props.navigation.navigate(toScreen, {userId: this.state.userId})
   }
-  
-
-  
 
   render() {
     console.log('userid contact: '+ this.state.userId)

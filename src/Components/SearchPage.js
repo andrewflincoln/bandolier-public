@@ -123,7 +123,7 @@ export default class SearchPage extends React.Component {
 
               </View>
 
-        }
+            }
 
 
             {this.state.instr_other ? 

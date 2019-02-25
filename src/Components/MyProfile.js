@@ -4,7 +4,7 @@ import axios from 'axios'
 import styles from '../styles'
 
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
-
+import {SecureStore} from 'expo'
 import ProfileBar from './ProfileBar'
 import NavBar from './NavBar'
 import UserCard from './UserCard'
@@ -28,16 +28,19 @@ export default class MyProfile extends React.Component {
     this.setState({userId: this.props.navigation.getParam('userId')})
   }
   componentDidMount = () => {
-
     this.getUser()
+    this.props.navigation.addListener('willFocus', this.getUser)
   }
   getUser = () =>  { 
-    axios.get(`${BASE_URL}/users/${this.state.userId}/${this.state.userId}`, attachHeader()) //should be a "self route" but this works!
+    axios.get(`${BASE_URL}/users/${this.state.userId}/${this.state.userId}`) //should be a "self route" but this works
     .then(response => {
-        // console.log(JSON.stringify(response))
-        this.setState({currentUser: response.data})
+        this.setState({currentUser: response.data.rows[0]})
     })
     .catch(() => console.log('failed to get user'))
+  }
+  signOut = () => {
+    SecureStore.deleteItemAsync('token')
+    this.props.navigation.navigate('Login')
   }
 
   navGen = (toScreen) => {
@@ -45,7 +48,7 @@ export default class MyProfile extends React.Component {
   }
   
   navCreate = () => {
-    this.props.navigation.navigate('Create') //
+    this.props.navigation.navigate('Create', {pageStatus: 'update', user: this.state.currentUser}) //
   }
 
  
@@ -77,7 +80,7 @@ export default class MyProfile extends React.Component {
                 />
               <View style={styles.nameMatchBar}>
                 <Text style={styles.profileTextName}>{user.username}</Text>
-                <IconM name='lead-pencil' size={20}/>
+    
               </View>
               {/* <Text style={styles.profileTextSectionHead}>Deal </Text> */}
               <Text style={styles.profileTextDeal}>{user.deal}</Text>
@@ -127,6 +130,7 @@ export default class MyProfile extends React.Component {
  
         <ProfileBar // do we want a bar?
           navCreate={this.navCreate}
+          signOut={this.signOut}
         />
           
       
