@@ -6,7 +6,6 @@ import styles from '../styles'
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
 
 function ChatHeaderRow(props) {
-  console.log('chatter props are ' + JSON.stringify(props))
 return (
     <View style={styles.chatHeaderRow}>
       

@@ -33,9 +33,7 @@ export default class Home extends React.Component {
   attachHeader = () => {
     let bearer = ''
     token = SecureStore.getItemAsync('token')
-    // console.log('attaching token: ', token)
     if (token) bearer = `Bearer ${token}`
-    console.log('attaching token: ', token)
     return {
       headers: {
         'Content-Type': 'application/json',
@@ -53,15 +51,11 @@ export default class Home extends React.Component {
         if (this.state.recents.length >= 10) {
           const newRecents = [...this.state.recents]
           newRecents.shift()
-          // newRecents.shift() 
           this.setState({ recents: newRecents })
         }
-       
-        console.log(JSON.stringify(this.state.recents))
-        console.log(response.data.id)
+
     })
     .then( () =>  { 
-        // console.log('url from nextUser: ', this.state.currentUser.url); 
         this.state.currentUser.url ? this.playUser(this.state.currentUser.url) 
         : this.playUser(`https://s3-us-west-2.amazonaws.com/bandolier-tracks/elevator_music.mp3`) //elevator music if no track
      } )
@@ -86,13 +80,11 @@ export default class Home extends React.Component {
 
 
   playUser = async (url) => {
-    // console.log('url given to playUser', url)
     this.state.userSound = new Audio.Sound();
       
     await this.state.userSound.loadAsync({uri: url})
 
     .then( () => this.state.userSound.playAsync() )
-    // .then(() =>     console.log('url after load', url))
     .catch (error => console.log('play user error: ', error) )
     
   }
@@ -101,12 +93,10 @@ export default class Home extends React.Component {
 
   stopUserSound = async () => {
    await this.state.userSound.unloadAsync()
-   .catch('could not unload from home')
   }
 
 
   render() {
-    console.log('userid radio: '+ this.state.userId)
     const {navigate} = this.props.navigation
     return (
 

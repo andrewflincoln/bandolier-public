@@ -52,7 +52,6 @@ export default class SearchPage extends React.Component {
   }
 
   goToProfile = (user) => {
-    console.log('user passed: ' + JSON.stringify(user))
     this.props.navigation.navigate('ProfileDisplay', {viewUserId: user.id, barType: 'search', userId: this.state.userId})
   }
 
@@ -63,7 +62,6 @@ export default class SearchPage extends React.Component {
  
 
   render() {
-    console.log('userid on search ', this.state.userId)
     const {navigate} = this.props.navigation
     return (
       <ImageBackground source={require('../guitars/IMG_20190208_065638226_HDR.jpg')} style={styles.imgBG}>
@@ -213,12 +211,7 @@ export default class SearchPage extends React.Component {
           
           </View>
           </ScrollView>
-
-
-
-
-
-        </View>
+      </View>
       </ImageBackground>
     )//return
   }//render

@@ -3,7 +3,6 @@ import {Text, TouchableOpacity, View, ImageBackground, Image, Button, ScrollView
 import styles from '../styles'
 import IconF from 'react-native-vector-icons/FontAwesome'
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
-import IconI from 'react-native-vector-icons/Ionicons'
 
 function PlayBar(props) {
   return (

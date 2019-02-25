@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View, ImageBackground, Image, Button, ScrollView} from 'react-native'
+import {View, ImageBackground, Button, ScrollView} from 'react-native'
 import axios from 'axios'
 import styles from '../styles'
 
@@ -38,20 +38,17 @@ export default class ProfileDisplay extends React.Component {
   getUser = (id) =>  { 
     axios.get(`${BASE_URL}/users/${this.state.userId}/${id}`) 
     .then(response => {
-        console.log(JSON.stringify(response))
-        this.setState({currentUser: response.data.rows[0], barType: this.props.navigation.getParam('barType')})
+        this.setState({currentUser: response.data, barType: this.props.navigation.getParam('barType')})//data vs data.rows[0] issues
     })
     .catch(() => console.log('failed to get user'))
   }
 
   playUserSound = async (url) => {
-    console.log('url given to playUser', url)
     this.state.profileSound = new Audio.Sound();
       
     await this.state.profileSound.loadAsync({uri: url})
 
     .then( () => this.state.profileSound.playAsync() )
-    .then(() =>     console.log('url after load', url))
     .catch (error => console.log('play user error: ', error) )
 
     this.setState({playing: true})
@@ -97,7 +94,6 @@ export default class ProfileDisplay extends React.Component {
   }
 
   unList = (user2) => {
-    console.log(this.state.userId, user2)
     axios.post(`${BASE_URL}/relations/alter`, {user_1: this.state.userId, user_2: user2})
     .then(this.navGen('Playlist'))
   }
@@ -105,8 +101,6 @@ export default class ProfileDisplay extends React.Component {
 
 
   render() {
-
-console.log('userid on profile display: ', this.state.userId)
     const {navigate} = this.props.navigation
     return (
       <ImageBackground source={require(`../guitars/fender_amp_grill.jpg`)} style={styles.imgBG}>

@@ -36,10 +36,8 @@ export default class Contact extends React.Component {
   }
   componentDidMount = () => {
     if (this.props.navigation.getParam('chatUser')) { //check if taken here from user page
-      console.log(this.props.navigation.getParam('chatUser'))
       this.goToChat(this.props.navigation.getParam('chatUser')) //this pulls down the user but already have them here. could cut down.
     }
-    console.log(this.props.navigation.getParam('userId'), this.state.userId)
 
     this.getConvos()
     this.keyboardDidShowListener = Keyboard.addListener(
@@ -65,7 +63,6 @@ export default class Contact extends React.Component {
     .catch(() => console.log('failed to get convos'))
   }
   goToChat = (user2) => {
-    console.log('starting get messages')
     axios.get(`${BASE_URL}/messages/${this.state.userId}/${user2}`)
     .then(response => this.setState({messages: response.data.rows, inChat: true}))
     .then(() => console.log(this.state.messages))
@@ -94,7 +91,6 @@ export default class Contact extends React.Component {
   }
 
   render() {
-    console.log('userid contact: '+ this.state.userId)
     const {navigate} = this.props.navigation
   
     return (                              
@@ -103,6 +99,7 @@ export default class Contact extends React.Component {
           <NavBar
             navGen={this.navGen}
             userId = {this.state.userId}
+            from='contact'
           />
 
           {

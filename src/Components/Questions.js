@@ -44,7 +44,6 @@ export default class Questions extends React.Component {
 
 
   render() {
-    console.log('userid qs: '+ this.state.userId)
     const q = this.state.currentQ
     return (
 

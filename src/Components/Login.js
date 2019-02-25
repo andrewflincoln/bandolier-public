@@ -23,11 +23,9 @@ export default class Login extends React.Component {
 
 
   handleSignIn = event => { //async?
-    console.log('starting handle signin')
     event.preventDefault()
     SecureStore.getItemAsync('token')
     .then( token => {
-      console.log('result from storage: ' + JSON.stringify(token))
       axios(`https://quiet-garden-92157.herokuapp.com/login`, {
         method: 'post',
         headers: {
@@ -42,7 +40,6 @@ export default class Login extends React.Component {
     })
 
     .then(response => {
-      console.log('token response: ' + JSON.stringify(response.data))
       this.setState({showError: false})
 
       SecureStore.setItemAsync('token', response.data.token)
@@ -68,9 +65,10 @@ export default class Login extends React.Component {
           
           <View style ={styles.loginForm}>
             <Text style={styles.loginHeader}>Bandolier</Text>
-            <Text style={styles.loginFormText}>Login email</Text>
+            <Text style={styles.loginFormText}>Email</Text>
             <TextInput
               style={styles.createInput}
+              textContentType='emailAddress'
               placeholder='Email'
               value={this.state.email}
               onChangeText={(email) => this.setState({email})}
@@ -84,7 +82,10 @@ export default class Login extends React.Component {
               value={this.state.password}
               onChangeText={(password) => this.setState({password})}
             />
-
+            {
+              this.state.showError ? <Text>Sorry, that didn't work. Try again, or sign up below!</Text>
+              : null
+            }
             <Button
               title="Login"
               color='#8EE8B9'
@@ -92,11 +93,7 @@ export default class Login extends React.Component {
               // onPress = {() => navigate('UserProfile')}
             />
 
-            {
-              this.state.showError ? <Text>Sorry, that didn't work. Try again, or:</Text>
-              : null
-            }
-
+            
           <Button
               title="Join right now!"
               text='black'
@@ -104,6 +101,9 @@ export default class Login extends React.Component {
               onPress={() => this.props.navigation.navigate('Create')}
               // onPress = {() => navigate('UserProfile')}
             />
+
+            
+
 
           </View>
 

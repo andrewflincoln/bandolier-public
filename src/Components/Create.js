@@ -37,7 +37,9 @@ export default class Create extends React.Component {
       newThing: '',
 
       pageStatus: 'create',
-      userToUpdate: {}
+      userToUpdate: {},
+      showError: false,
+      errorText: 'Failed to create account. Be sure to fill out required fields.'
     }
   }
 
@@ -55,23 +57,19 @@ export default class Create extends React.Component {
 
   handleSubmit = () => {
     const newUser = {...this.state}
-    console.log(newUser)
 
     axios.post(`${BASE_URL}/users`, newUser)
     .then(response => {
-      console.log(JSON.stringify(response))
         this.props.navigation.navigate('Home', {userId: response.data.id})
     }) 
-    .catch(() => console.log('failed to create'))
+    .catch((error) => this.setState({showError: true}) )
   }
 
   handleUpdate = () => {
     const updatedUser = {...this.state}
-    console.log(updatedUser)
 
     axios.put(`${BASE_URL}/users`, updatedUser)
     .then(response => {
-      console.log(JSON.stringify(response))
         this.props.navigation.navigate('MyProfile', {userId: response.data.id})
     }) 
     .catch(() => console.log('failed to update'))
@@ -79,32 +77,32 @@ export default class Create extends React.Component {
 
 
   render() {
-    console.log('user at render ', this.state.userToUpdate)
+   
     const {navigate} = this.props.navigation
     return (
       <ImageBackground source={require('../guitars/IMG_20190208_065638226_HDR.jpg')} style={styles.imgBG}>
         <View style={styles.createBG}>
-     
+   
           <ScrollView style={styles.userCardScroll}>
 
             <View style={styles.createView}> 
 
             {this.state.pageStatus === 'create' ? 
               <View>
-                <Text style={styles.createHeaders}>Email</Text>
+                <Text style={styles.createHeaders}>Email*</Text>
                   <TextInput placeHolder='Email' 
-                  value={this.state.email}
+                  value={this.state.email}  
                   onChangeText={email => this.setState({email})}
                   style={styles.createInput}></TextInput>
 
-                <Text style={styles.createHeaders}>Password</Text>
+                <Text style={styles.createHeaders}>Password*</Text>
                   <TextInput placeHolder='Password' 
                   secureTextEntry={true}
                   value={this.state.password}
                   onChangeText={password => this.setState({password})}
                   style={styles.createInput}></TextInput>
 
-                <Text style={styles.createHeaders}>Username</Text>
+                <Text style={styles.createHeaders}>Username*</Text>
                 <TextInput placeHolder='Username' 
                   value={this.state.username}
                   onChangeText={username => this.setState({username})}
@@ -404,7 +402,7 @@ export default class Create extends React.Component {
 
 
 
-              <Text style={styles.createHeaders}>Your Deal</Text>
+              <Text style={styles.createHeaders}>Your Deal*</Text>
               <Text>What's your deal? Briefly, who are you and what are you looking for?</Text> 
               <TextInput multiline={true} placeHolder='My deal? Lemme think...'
                 maxLength={200}
@@ -433,6 +431,10 @@ export default class Create extends React.Component {
                 onChangeText={influences => this.setState({influences})}
                 style={styles.createInput}></TextInput>
 
+          {
+            this.state.showError ? <Text>{this.state.errorText}</Text>
+            : null
+          }
 
               {this.state.pageStatus === 'create' ? 
               <TouchableOpacity style={styles.createSubmitButton} onPress={this.handleSubmit}>
@@ -440,6 +442,7 @@ export default class Create extends React.Component {
                   Go
                 </Text>
               </TouchableOpacity>
+
               : 
               <TouchableOpacity style={styles.createSubmitButton} onPress={this.handleUpdate}>
                 <Text style={styles.answerButtonText}>
@@ -447,7 +450,6 @@ export default class Create extends React.Component {
                 </Text>
               </TouchableOpacity>
               }
-
 
 
             </View>
@@ -467,63 +469,3 @@ export default class Create extends React.Component {
   }//render
 
 }
-
-
-
-
-
-
-//modal for "other" options
-
-// <Modal
-// style={styles.otherModal}
-// animationType="slide"
-// transparent={true}
-// visible={this.state.modalVisible}
-// onRequestClose={() => {
-// Alert.alert('Modal has been closed.');
-// }}>
-// <View style={styles.modalView}>
-// <View>
-// <Text style={styles.createHeaders}>Other Genre:</Text>
-
-// <TextInput placeHolder='My Genre' 
-// // value={this.state.other}
-// onChangeText={other => this.setState({other})}
-// style={styles.createInput}></TextInput>
-
-
-// <TouchableOpacity
-// onPress={() => {
-// console.log('target for switch: ' + this.state.otherTarget + '  other ' + this.state.other)
-// // this.setState({modalVisible: !this.state.modalVisible})
-
-// switch(this.state.otherTarget) {
-
-// case 'genre_1': 
-// console.log('it is 1')
-// this.setState({genre_1: this.state.other, modalVisible: !this.state.modalVisible})
-// console.log('genre 1: ' + this.state.genre_1)
-// break;
-// case 'genre_2': 
-// this.setState({genre_2: this.state.other})
-// case 'genre_3': 
-// this.setState({genre_3: this.state.other})
-
-// case 'instr_1': 
-// this.setState({instr_1: this.state.other})
-// case 'instr_2': 
-// this.setState({instr_2: this.state.other})
-// case 'instr_3': 
-// this.setState({instr_3: this.state.other})
-// case '': console.log('it is blank!')
-// default: console.log('defaulted')
-
-// }
-// // this.setState({other: 'Other'})
-// }}>
-// <Text>Add</Text>
-// </TouchableOpacity>
-// </View>
-// </View>
-// </Modal>

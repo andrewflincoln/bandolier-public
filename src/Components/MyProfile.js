@@ -54,8 +54,6 @@ export default class MyProfile extends React.Component {
  
 
   render() {
-    console.log('userid myprofile: '+ this.state.userId)
-
     const {navigate} = this.props.navigation
     const user = this.state.currentUser
     return (

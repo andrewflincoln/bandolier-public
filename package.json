@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "email-validator": "^2.0.4",
     "expo": "^32.0.6",
     "expo-cli": "^2.11.1",
     "expo-core": "^2.0.1",
