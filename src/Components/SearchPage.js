@@ -71,6 +71,7 @@ export default class SearchPage extends React.Component {
         <NavBar
           userId={this.state.userId}
           navGen={this.navGen}
+          from='searchpage'
         />
       
         

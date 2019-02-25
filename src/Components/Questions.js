@@ -54,6 +54,7 @@ export default class Questions extends React.Component {
       <NavBar
         userId={this.state.userId}
         navGen={this.navGen}
+        from='questions'
 
       />
 

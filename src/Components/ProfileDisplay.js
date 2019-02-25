@@ -28,11 +28,11 @@ export default class ProfileDisplay extends React.Component {
   }
 
   componentWillMount = () => {
-    this.setState({userId: this.props.navigation.getParam('userId')})
+    this.setState({userId: this.props.navigation.getParam('userId')}) //passing user id
   }
   componentDidMount = () => {
     this.getUser(this.props.navigation.getParam('viewUserId'))
-    this.props.navigation.addListener('willFocus', this.getUser)
+    this.props.navigation.addListener('willFocus', () => this.getUser(this.props.navigation.getParam('viewUserId')) )
   }
 
   getUser = (id) =>  { 
@@ -65,12 +65,12 @@ export default class ProfileDisplay extends React.Component {
 
   navGen = (toScreen) => {
     this.props.navigation.navigate(toScreen, {userId: this.state.userId})
+    this.setState({ currentUser: {} })
     if (this.state.playing)
       this.stopUserSound()
   }
   
   contactUser = (chatterId) => {
-    // this.navGen('Contact', {chatUser: user})
     this.props.navigation.navigate('Contact', {chatUser: chatterId, userId: this.state.userId})
     if (this.state.playing)
       this.stopUserSound()

@@ -50,7 +50,7 @@ export default class Contact extends React.Component {
       'keyboardDidHide',
       this._keyboardDidHide,
     );
-    // this.props.navigation.addListener('willFocus', this.getConvos) //refresh on each view?
+ 
   }
   _keyboardDidShow= () =>  {
     this.setState({keysUp: true})

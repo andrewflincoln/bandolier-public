@@ -131,6 +131,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 8
   },
+  navIcon: {
+    color: 'white'
+  },
+  navIconSelected: {
+    color: 'blue'
+  },
 
   playlistView: {
     backgroundColor: '#8EE8B9',

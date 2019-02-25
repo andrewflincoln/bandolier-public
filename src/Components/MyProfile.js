@@ -65,6 +65,7 @@ export default class MyProfile extends React.Component {
             userId={this.state.userId}
             navGen={this.navGen}
             setUser = {this.setUser}
+            from='myprofile'
           />
 
           <View style={styles.myProfileHeadlineView}>

@@ -117,6 +117,7 @@ export default class Home extends React.Component {
           <NavBar
             navGen={this.navGen}
             userId={this.state.userId}
+            from='home'
           />
 
           <ScrollView style={styles.userCardScroll}>

@@ -58,6 +58,7 @@ export default class Playlist extends React.Component {
           <NavBar
             navGen={this.navGen}
             userId = {this.state.userId}
+            from='playlist'
         
           />
           {
