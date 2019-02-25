@@ -18,7 +18,7 @@ export default class Home extends React.Component {
     this.state= {
       userId: 0,   //'',
       currentUser: {},
-      recents: [],
+      recents: [20]
 
     }
   }
@@ -46,9 +46,19 @@ export default class Home extends React.Component {
   }
 
   nextUser = () =>  { //find next user to show while browsing
-    axios.get(`${BASE_URL}/users/next/${this.state.userId}`)
+    axios.post(`${BASE_URL}/users/next`, {userId: this.state.userId, recents: this.state.recents})
     .then(response => {
         this.setState({currentUser: response.data})
+        this.setState({ recents: [...this.state.recents, response.data.id] }) //track recents to avoid repeats
+        if (this.state.recents.length >= 10) {
+          const newRecents = [...this.state.recents]
+          newRecents.shift()
+          // newRecents.shift() 
+          this.setState({ recents: newRecents })
+        }
+       
+        console.log(JSON.stringify(this.state.recents))
+        console.log(response.data.id)
     })
     .then( () =>  { 
         // console.log('url from nextUser: ', this.state.currentUser.url); 
