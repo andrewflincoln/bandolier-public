@@ -35,8 +35,12 @@ const styles = StyleSheet.create({
   },
   loginHeader: {
     alignSelf: 'center',
-    fontSize: 30,
-    marginBottom: 10
+    fontSize: 50,
+    marginBottom: 10,
+    fontFamily: 'dancing-script'
+  },
+  loginButton: {
+    marginBottom: 8,
   },
   userCardScroll: {
     height: '100%',

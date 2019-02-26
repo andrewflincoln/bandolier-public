@@ -3,6 +3,7 @@ import {Text, TextInput, View, ImageBackground, Image, Button} from 'react-nativ
 import axios from 'axios'
 import styles from '../styles'
 import {SecureStore} from 'expo'
+import {Font} from 'expo'
 
 
 
@@ -14,8 +15,17 @@ export default class Login extends React.Component {
     this.state= {
       email: 'carla@autolux.com',
       password: 'carla',
-      showError: false   
+      showError: false,
+      fontLoaded: false   
     }
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'dancing-script': require('../../assets/fonts/DancingScript-Regular.ttf')
+
+    })
+    this.setState({fontLoaded: true})
   }
 
 
@@ -50,19 +60,24 @@ export default class Login extends React.Component {
   })
   }
 
-
-
-
   render() {
 
     const {navigate} = this.props.navigation
     return (
-      <ImageBackground source={require('../guitars/IMG_20190208_070218915_HDR.jpg')} style={styles.loginImgBG}>
+      <ImageBackground source={require('../guitars/IMG_20190208_065538007.jpg')} style={styles.loginImgBG}>
         <View style={styles.loginBG}>
           
           <View style ={styles.loginForm}>
-            <Text style={styles.loginHeader}>Bandolier</Text>
-            <Text style={styles.loginFormText}>Email</Text>
+
+            {this.state.fontLoaded ? 
+            <Text style={{fontFamily: 'dancing-script', fontSize: 60, alignSelf: 'center'}}>Bandolier</Text>
+            // <Text style={styles.loginHeader}>Bandolier</Text>
+                : null}
+
+
+            {this.state.fontLoaded ? 
+            <Text style={{fontFamily: 'dancing-script', fontSize: 25}}>Email</Text>
+                : null}
             <TextInput
               style={styles.createInput}
               textContentType='emailAddress'
@@ -71,7 +86,9 @@ export default class Login extends React.Component {
               onChangeText={(email) => this.setState({email})}
             />
 
-            <Text style={styles.loginFormText}>Password</Text>
+            {this.state.fontLoaded ? 
+            <Text style={{fontFamily: 'dancing-script', fontSize: 25}}>Password</Text>
+                : null}
             <TextInput
               style={styles.createInput}
               secureTextEntry={true}
@@ -83,20 +100,18 @@ export default class Login extends React.Component {
               this.state.showError ? <Text>Sorry, that didn't work. Try again, or sign up below!</Text>
               : null
             }
-            <Button
+            <Button style={styles.loginButton}
+            marginBottom='10'
               title="Login"
-              color='#8EE8B9'
+              color='#519DE8'
               onPress={this.handleSignIn}
-              // onPress = {() => navigate('UserProfile')}
             />
 
             
           <Button
-              title="Join right now!"
-              text='black'
-              color='#8EE8B9'
+              title="Sign up"
+              color='#519DE8'
               onPress={() => this.props.navigation.navigate('Create')}
-              // onPress = {() => navigate('UserProfile')}
             />
 
             
