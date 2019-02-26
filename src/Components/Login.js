@@ -13,8 +13,8 @@ export default class Login extends React.Component {
     super(props)
     
     this.state= {
-      email: 'carla@autolux.com',
-      password: 'carla',
+      email: 'jack@white.com',
+      password: 'jack',
       showError: false,
       fontLoaded: false   
     }
@@ -22,7 +22,8 @@ export default class Login extends React.Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      'dancing-script': require('../../assets/fonts/DancingScript-Regular.ttf')
+      // 'dancing-script': require('../../assets/fonts/DancingScript-Regular.ttf')
+      'belair': require('../../assets/fonts/Belair-Regular.otf')
 
     })
     this.setState({fontLoaded: true})
@@ -70,36 +71,37 @@ export default class Login extends React.Component {
           <View style ={styles.loginForm}>
 
             {this.state.fontLoaded ? 
-            <Text style={{fontFamily: 'dancing-script', fontSize: 60, alignSelf: 'center'}}>Bandolier</Text>
+            <Text style={{fontFamily: 'belair', fontSize: 59, alignSelf: 'center'}}>Bandolier</Text>
             // <Text style={styles.loginHeader}>Bandolier</Text>
                 : null}
 
+            <View style={styles.emailPasswordView}>
+              {this.state.fontLoaded ? 
+              <Text style={{fontFamily: 'belair', fontSize: 25}}>Email</Text>
+                  : null}
+              <TextInput
+                style={styles.createInput}
+                textContentType='emailAddress'
+                placeholder='Email'
+                value={this.state.email}
+                onChangeText={(email) => this.setState({email})}
+              />
 
-            {this.state.fontLoaded ? 
-            <Text style={{fontFamily: 'dancing-script', fontSize: 25}}>Email</Text>
-                : null}
-            <TextInput
-              style={styles.createInput}
-              textContentType='emailAddress'
-              placeholder='Email'
-              value={this.state.email}
-              onChangeText={(email) => this.setState({email})}
-            />
-
-            {this.state.fontLoaded ? 
-            <Text style={{fontFamily: 'dancing-script', fontSize: 25}}>Password</Text>
-                : null}
-            <TextInput
-              style={styles.createInput}
-              secureTextEntry={true}
-              placeholder='Password'
-              value={this.state.password}
-              onChangeText={(password) => this.setState({password})}
-            />
-            {
-              this.state.showError ? <Text>Sorry, that didn't work. Try again, or sign up below!</Text>
-              : null
-            }
+              {this.state.fontLoaded ? 
+              <Text style={{fontFamily: 'belair', fontSize: 25}}>Password</Text>
+                  : null}
+              <TextInput
+                style={styles.createInput}
+                secureTextEntry={true}
+                placeholder='Password'
+                value={this.state.password}
+                onChangeText={(password) => this.setState({password})}
+              />
+              {
+                this.state.showError ? <Text>Sorry, that didn't work. Try again, or sign up below!</Text>
+                : null
+              }
+            </View>
             <Button style={styles.loginButton}
             marginBottom='10'
               title="Login"

@@ -47,7 +47,7 @@ export default class Questions extends React.Component {
     const q = this.state.currentQ
     return (
 
-      <ImageBackground source={require(`../guitars/IMG_20190208_070255309_HDR.jpg`)} style={styles.imgBG} >
+      <ImageBackground source={require(`../guitars/IMG_20190208_070320594_HDR.jpg`)} style={styles.imgBG} >
       <View style={styles.questionsPage}>
 
       <NavBar

@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   }, 
   loginForm: {
     alignSelf: 'center',
-    width: '80%',
+    width: '86%',
     backgroundColor: '#FFF9CC',
     borderRadius: 10,
     padding: 10,
@@ -33,12 +33,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
   
   },
-  loginHeader: {
-    alignSelf: 'center',
-    fontSize: 50,
-    marginBottom: 10,
-    fontFamily: 'dancing-script'
+  emailPasswordView: {
+    marginTop: 8,
+    marginBottom: 6
   },
+
   loginButton: {
     marginBottom: 8,
   },
@@ -180,12 +179,12 @@ const styles = StyleSheet.create({
   questionsPage: {
     backgroundColor: '#8EE8B9',
     height: '100%',
-    opacity: 0.85
+    opacity: 0.75
   },
   questionCard: {
     alignSelf: 'center',
-    // backgroundColor: '#FFF9CC',
-    backgroundColor: 'white',
+    backgroundColor: '#FFF9CC',
+    // backgroundColor: 'white',
     width: '90%',
     marginTop: 70,
     marginBottom: 10,
@@ -195,15 +194,16 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   questionText: {
-    fontSize: 20
+    fontSize: 18
   },
   optionCard: {
     alignSelf: 'center',
-    backgroundColor: '#FFF9CC',
-    // backgroundColor: 'white',
+    // backgroundColor: '#FFF9CC',
+    backgroundColor: 'white',
     width: '90%',
-    marginTop: 5,
-    borderRadius: 8,
+    marginTop: 8,
+    borderRadius: 120,
+    // borderRadius: 8,
     padding: 15,
   },
   selectedAnswer: {
@@ -212,11 +212,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#C4EDFF',
     width: '93%',
     marginTop: 5,
-    borderRadius: 8,
+    borderRadius: 120,
     padding: 16,
   },
   questionSubmitView: {
-    marginTop: 12,
+    marginTop: 19,
     marginBottom: 10,
     justifyContent: 'center',
     flexDirection: 'row',
@@ -424,7 +424,7 @@ const styles = StyleSheet.create({
     width: '90%',
     marginTop: 5,
     // marginLeft: 5,
-    paddingRight: 5,
+    paddingRight: 20,
     backgroundColor: '#FFF9CC',
     // backgroundColor: 'white',
     borderRadius: 10
