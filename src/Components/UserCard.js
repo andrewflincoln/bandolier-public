@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View, ImageBackground, Image, Button, ScrollView} from 'react-native'
+import {Text, View, Image} from 'react-native'
 import styles from '../styles'
 import {Audio} from 'expo'
 

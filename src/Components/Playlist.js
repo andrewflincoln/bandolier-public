@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, TouchableOpacity, View, ImageBackground} from 'react-native'
+import {View, ImageBackground} from 'react-native'
 import NavBar from './NavBar'
 import PlaylistRow from './PlaylistRow'
 

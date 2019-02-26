@@ -1,9 +1,8 @@
 import React from 'react'
 import {Text, View, ImageBackground, TextInput, Picker, Modal, Image, TouchableOpacity, ScrollView} from 'react-native'
-import {connect} from 'react-redux'
 import axios from 'axios'
 import styles from '../styles'
-import PlayBar from './PlayBar'
+
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 

@@ -18,7 +18,7 @@ export default class Home extends React.Component {
     this.state= {
       userId: 0,   //'',
       currentUser: {},
-      recents: [20]
+      recents: [99]
 
     }
   }
@@ -44,11 +44,12 @@ export default class Home extends React.Component {
   }
 
   nextUser = () =>  { //find next user to show while browsing
+    console.log(this.state.recents)
     axios.post(`${BASE_URL}/users/next`, {userId: this.state.userId, recents: this.state.recents})
     .then(response => {
         this.setState({currentUser: response.data})
         this.setState({ recents: [...this.state.recents, response.data.id] }) //track recents to avoid repeats
-        if (this.state.recents.length >= 10) {
+        if (this.state.recents.length >= 8) {
           const newRecents = [...this.state.recents]
           newRecents.shift()
           this.setState({ recents: newRecents })
@@ -109,15 +110,21 @@ export default class Home extends React.Component {
             userId={this.state.userId}
             from='home'
           />
+    
+              {/* card or empty message */}
+            {/* {this.state.currentUser.username ?  */}
+            <ScrollView style={styles.userCardScroll}>
+              <UserCard
+                playItSam={this.playItSam}
+                user={this.state.currentUser}
+              />
+            
+            </ScrollView>
 
-          <ScrollView style={styles.userCardScroll}>
-            <UserCard
-              playItSam={this.playItSam}
-              user={this.state.currentUser}
-            />
-          
-          </ScrollView>
-        
+            {/* // :
+            // <Text style={styles.emptyMsg}>Looks like you ran out of users and still don't have a band. You can have your money back.</Text>
+            // } */}
+     
         <PlayBar
           user={this.state.currentUser}
           judgeUser={this.judgeUser}

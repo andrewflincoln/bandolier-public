@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
 
   }, 
   loginForm: {
-    
     alignSelf: 'center',
     width: '80%',
     backgroundColor: '#FFF9CC',
@@ -42,6 +41,10 @@ const styles = StyleSheet.create({
   userCardScroll: {
     height: '100%',
     marginTop: 6,
+  },
+  emptyMsg: {
+    fontSize: 20,
+    marginTop: 50
   },
 
   profileBG: {
@@ -201,8 +204,8 @@ const styles = StyleSheet.create({
   },
   selectedAnswer: {
     alignSelf: 'center',
-    backgroundColor: '#FFAF99',
-    // backgroundColor: '#C4EDFF',
+    // backgroundColor: '#FFAF99',
+    backgroundColor: '#C4EDFF',
     width: '93%',
     marginTop: 5,
     borderRadius: 8,

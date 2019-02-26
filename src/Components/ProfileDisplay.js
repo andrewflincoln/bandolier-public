@@ -7,7 +7,6 @@ import PlaylistBar from './PlaylistBar'
 import SearchedBar from './SearchedBar'
 import NavBar from './NavBar'
 import UserCard from './UserCard'
-import attachHeader from './Home'
 
 import {Audio, SecureStore} from 'expo'
 

@@ -1,10 +1,7 @@
 import React from 'react'
 import {Text, TextInput, View, ImageBackground, Image, Button} from 'react-native'
-import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux'
 import axios from 'axios'
 import styles from '../styles'
-import request from '../utils/request'
 import {SecureStore} from 'expo'
 
 
@@ -22,7 +19,7 @@ export default class Login extends React.Component {
   }
 
 
-  handleSignIn = event => { //async?
+  handleSignIn = event => { 
     event.preventDefault()
     SecureStore.getItemAsync('token')
     .then( token => {

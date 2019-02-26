@@ -11,8 +11,7 @@ import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import styles from '../styles'
 import axios from 'axios';
-import {SecureStore} from 'expo'
-import attachHeader from './Home'
+
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
@@ -27,8 +26,10 @@ export default class Contact extends React.Component {
       inChat: false,
       chatter: {},
       newMessage: '',
-      keysUp: false
+      keysUp: false,
+      testString: 'nope'
     }
+
   }
 
   componentWillMount = () => {
@@ -69,8 +70,7 @@ export default class Contact extends React.Component {
     .catch(() => console.log('failed to get messages'))
 
     axios.get(`${BASE_URL}/users/${this.state.userId}/${user2}`)
-    .then(response => this.setState({chatter: response.data.rows[0]})) //added the 0 back...should really normalize these on backend
-    .then(() => console.log('chatter: ', this.state.chatter.id))
+    .then(response => this.setState({chatter: response.data})) //took the [0] off again. lol.
   }
 
   postMessage = () => {
@@ -101,6 +101,7 @@ export default class Contact extends React.Component {
             userId = {this.state.userId}
             from='contact'
           />
+      
 
           {
             !this.state.inChat ? 

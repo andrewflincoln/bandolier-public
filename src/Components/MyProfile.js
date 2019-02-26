@@ -34,7 +34,7 @@ export default class MyProfile extends React.Component {
   getUser = () =>  { 
     axios.get(`${BASE_URL}/users/${this.state.userId}/${this.state.userId}`) //should be a "self route" but this works
     .then(response => {
-        this.setState({currentUser: response.data.rows[0]})
+        this.setState({currentUser: response.data}) //data vs data.rows[0]
     })
     .catch(() => console.log('failed to get user'))
   }
