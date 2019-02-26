@@ -13,13 +13,9 @@ export default class Playlist extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-
       listUsers:  [],
-
-      
     }
   }
-
 
   componentWillMount = () => {
     this.setState({userId: this.props.navigation.getParam('userId')})

@@ -66,19 +66,21 @@ export default class Contact extends React.Component {
   goToChat = (user2) => {
     axios.get(`${BASE_URL}/messages/${this.state.userId}/${user2}`)
     .then(response => this.setState({messages: response.data.rows, inChat: true}))
-    .then(() => console.log(this.state.messages))
     .catch(() => console.log('failed to get messages'))
 
     axios.get(`${BASE_URL}/users/${this.state.userId}/${user2}`)
     .then(response => this.setState({chatter: response.data})) //took the [0] off again. lol.
   }
 
-  postMessage = () => {
+  postMessage = async () => {
     const msg = {sender_id: this.state.userId, receiver_id: this.state.chatter.id, body: this.state.newMessage}
-    axios.post(`${BASE_URL}/messages`, msg)
-    .then(() => this.setState({newMessage: ''}))
-    .catch(() => console.log('could not send message'))
-    this.goToChat(this.state.chatter.id)
+    await axios.post(`${BASE_URL}/messages`, msg)
+    .then(async () =>  await axios.get(`${BASE_URL}/messages/${this.state.userId}/${this.state.chatter.id}`) )
+    .then(response => {
+      this.setState({messages: response.data.rows, newMessage: ''})
+    })
+
+    
 
   }
 
@@ -101,7 +103,6 @@ export default class Contact extends React.Component {
             userId = {this.state.userId}
             from='contact'
           />
-      
 
           {
             !this.state.inChat ? 
