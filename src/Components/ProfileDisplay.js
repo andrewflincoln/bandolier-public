@@ -8,7 +8,7 @@ import SearchedBar from './SearchedBar'
 import NavBar from './NavBar'
 import UserCard from './UserCard'
 
-import {Audio, SecureStore} from 'expo'
+import {Audio} from 'expo'
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
@@ -18,7 +18,7 @@ export default class ProfileDisplay extends React.Component {
     super(props)
 
     this.state= {
-      userId: 0,   //'',
+      userId: 0,  
       currentUser: {},
       barType: '',
       playing: false
@@ -72,7 +72,7 @@ export default class ProfileDisplay extends React.Component {
       this.stopUserSound()
   }
 
-  addToPlaylist= (user) => { //2 function here could be one, depending how much gets added
+  addToPlaylist= (user) => { //2 functions here could be one, depending how much gets added
     axios.post(`${BASE_URL}/relations`, {user_1: this.state.userId, user_2: user, status: 'played'})
     .catch(() => console.log('failed to play user'))
     .then(() => {
@@ -94,6 +94,7 @@ export default class ProfileDisplay extends React.Component {
 
   unList = (user2) => {
     axios.post(`${BASE_URL}/relations/alter`, {user_1: this.state.userId, user_2: user2})
+    .then(this.props.navigation.getParam('getPlaylist'))
     .then(this.navGen('Playlist'))
   }
  

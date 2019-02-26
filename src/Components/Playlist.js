@@ -25,15 +25,14 @@ export default class Playlist extends React.Component {
     this.setState({userId: this.props.navigation.getParam('userId')})
   }
   componentDidMount = () => {
-
     this.getPlaylist()
     this.props.navigation.addListener('willFocus', this.getPlaylist) //
   }
 
 
-  getPlaylist = () => {
-    axios.get(`${BASE_URL}/relations/playlist/${this.state.userId}`)
-    .then(response => this.setState({listUsers: response.data.rows}))
+  getPlaylist = async () => {
+    await axios.get(`${BASE_URL}/relations/playlist/${this.state.userId}`)
+    .then(response => this.setState({listUsers: response.data.rows}) )
   }
 
   navGen = (toScreen) => {
@@ -42,7 +41,7 @@ export default class Playlist extends React.Component {
   
 
   goToProfile = (user) => {
-    this.props.navigation.navigate('ProfileDisplay', {viewUserId: user.id, barType: 'playlist', userId: this.state.userId})
+    this.props.navigation.navigate('ProfileDisplay', {viewUserId: user.id, barType: 'playlist', userId: this.state.userId, getPlaylist: this.getPlaylist})
   }
 
  
