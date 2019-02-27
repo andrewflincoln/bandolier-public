@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, ImageBackground, Button, ScrollView} from 'react-native'
+import {Text, TouchableOpacity, View, ImageBackground, ScrollView} from 'react-native'
 import axios from 'axios'
 import styles from '../styles'
 
@@ -8,7 +8,8 @@ import SearchedBar from './SearchedBar'
 import NavBar from './NavBar'
 import UserCard from './UserCard'
 
-import {Audio} from 'expo'
+import {Audio, Font} from 'expo'
+import IconF from 'react-native-vector-icons/FontAwesome'
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
@@ -21,13 +22,18 @@ export default class ProfileDisplay extends React.Component {
       userId: 0,  
       currentUser: {},
       barType: '',
-      playing: false
+      playing: false,
+      fontLoaded: false
       
     }
   }
 
-  componentWillMount = () => {
+  componentWillMount = async () => {
     this.setState({userId: this.props.navigation.getParam('userId')}) //passing user id
+    await Font.loadAsync({
+      'belair': require('../../assets/fonts/Belair-Regular.otf')
+    })
+    this.setState({fontLoaded: true})
   }
   componentDidMount = () => {
     this.getUser(this.props.navigation.getParam('viewUserId'))
@@ -120,19 +126,30 @@ export default class ProfileDisplay extends React.Component {
 
 
 
-          {
-          !this.state.playing ? 
-          <Button
-            title={`Play " ${this.state.currentUser.title}"`} 
-            onPress={() => this.playUserSound(this.state.currentUser.url)}
-          />
-          : 
-          <Button
-            title='Stop'
-            onPress = {() => this.stopUserSound() }
-          />
+        {!this.state.currentUser.title ? 
+        <View style={styles.bottomLine}>
+        <Text style={{ fontFamily: 'belair', color: 'white', fontSize: 25}}> {this.state.currentUser.username} has no songs.</Text>
+        </View>
 
-          }
+        :
+
+        <View style={styles.bottomLine}>
+          {
+            !this.state.playing ? 
+              <TouchableOpacity onPress={() => this.playUserSound(this.state.currentUser.url)}>
+                {this.state.fontLoaded ? <Text style={{ fontFamily: 'belair', color: 'white', fontSize: 25}}>Hear "{this.state.currentUser.title}"  <IconF name='play' color='white' size={17}/></Text>
+                                      
+               :null}
+              </TouchableOpacity>
+              
+              :
+              <TouchableOpacity onPress = {() => this.stopUserSound()} >
+                {this.state.fontLoaded ? <Text style={{ fontFamily: 'belair', color: 'white', fontSize: 25}}>Stop  <IconF name='stop' color='white' size={17}/></Text>
+                :null}
+              </TouchableOpacity>
+            }
+        </View>
+        }
 
 
 

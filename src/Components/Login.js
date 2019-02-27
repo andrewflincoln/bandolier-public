@@ -1,9 +1,10 @@
 import React from 'react'
-import {Text, TextInput, View, ImageBackground, Image, Button} from 'react-native'
+import {Text, TextInput, View, ImageBackground, TouchableOpacity} from 'react-native'
 import axios from 'axios'
 import styles from '../styles'
 import {SecureStore} from 'expo'
 import {Font} from 'expo'
+
 
 
 
@@ -22,9 +23,7 @@ export default class Login extends React.Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      // 'dancing-script': require('../../assets/fonts/DancingScript-Regular.ttf')
       'belair': require('../../assets/fonts/Belair-Regular.otf')
-
     })
     this.setState({fontLoaded: true})
   }
@@ -65,14 +64,13 @@ export default class Login extends React.Component {
 
     const {navigate} = this.props.navigation
     return (
-      <ImageBackground source={require('../guitars/IMG_20190208_065538007.jpg')} style={styles.loginImgBG}>
+      <ImageBackground source={require('../guitars/hondo_angle.jpg')} style={styles.loginImgBG}>
         <View style={styles.loginBG}>
           
           <View style ={styles.loginForm}>
 
             {this.state.fontLoaded ? 
             <Text style={{fontFamily: 'belair', fontSize: 59, alignSelf: 'center'}}>Bandolier</Text>
-            // <Text style={styles.loginHeader}>Bandolier</Text>
                 : null}
 
             <View style={styles.emailPasswordView}>
@@ -102,23 +100,18 @@ export default class Login extends React.Component {
                 : null
               }
             </View>
-            <Button style={styles.loginButton}
-            marginBottom='10'
-              title="Login"
-              color='#519DE8'
-              onPress={this.handleSignIn}
-            />
 
+            {this.state.fontLoaded ? 
+            <View style={styles.loginButtonsView} >
+              <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => this.props.navigation.navigate('Create')}>
+                  <Text style={{fontFamily: 'belair', fontSize: 25}}>Sign Up</Text>
+              </TouchableOpacity>
+              <TouchableOpacity  onPress={this.handleSignIn}>
+                  <Text style={{fontFamily: 'belair', fontSize: 25}}>Log In</Text>
+              </TouchableOpacity>
+            </View>
+            : null}
             
-          <Button
-              title="Sign up"
-              color='#519DE8'
-              onPress={() => this.props.navigation.navigate('Create')}
-            />
-
-            
-
-
           </View>
 
 

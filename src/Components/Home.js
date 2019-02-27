@@ -6,7 +6,7 @@ import UserCard from './UserCard'
 import PlayBar from './PlayBar'
 import NavBar from './NavBar'
 
-import {Audio, SecureStore} from 'expo'
+import {Audio} from 'expo'
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
@@ -15,7 +15,7 @@ export default class Home extends React.Component {
     super(props)
 
     this.state= {
-      userId: 0,   //'',
+      userId: 0,   
       currentUser: {},
       recents: [99],
       playing: false
@@ -31,18 +31,6 @@ export default class Home extends React.Component {
     this.nextUser()
   }
 
-  attachHeader = () => {
-    let bearer = ''
-    token = SecureStore.getItemAsync('token')
-    if (token) bearer = `Bearer ${token}`
-    return {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': bearer
-      }
-    }
-  }
 
   nextUser = () =>  { //find next user to show while browsing
     axios.post(`${BASE_URL}/users/next`, {userId: this.state.userId, recents: this.state.recents})
@@ -80,10 +68,9 @@ export default class Home extends React.Component {
     this.state.userSound = new Audio.Sound();
       
     await this.state.userSound.loadAsync({uri: url})
-
     .then( () => this.state.userSound.playAsync() )
-    .catch (error => console.log('play user error: ', error) )    
-    this.setState({playing: true})
+    .then(this.setState({playing: true})    ) 
+    .catch (error => console.log('play user error: ', error) )   
   }
   
   stopUserSound = async () => {

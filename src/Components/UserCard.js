@@ -1,14 +1,22 @@
 import React from 'react'
 import {Text, View, Image} from 'react-native'
 import styles from '../styles'
-import {Audio} from 'expo'
+import {Font} from 'expo'
 
 
 export default class UserCard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      fontLoaded: false
     }
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'belair': require('../../assets/fonts/Belair-Regular.otf')
+    })
+    this.setState({fontLoaded: true})
   }
 
   render() {
@@ -22,7 +30,12 @@ export default class UserCard extends React.Component {
           source={{uri: this.props.user.img_url}}
           />
         <View style={styles.nameMatchBar}>
-          <Text style={styles.profileTextName}>{this.props.user.username}</Text>
+
+          {this.state.fontLoaded ? 
+          <Text style={[ this.props.user.username && this.props.user.username.length > 8 ? {fontFamily: 'belair', fontSize: 35, marginTop: 5 } 
+            : {fontFamily: 'belair', fontSize: 45, marginTop: 5 }]}>{this.props.user.username}</Text>
+          : null}
+
           <Text style={styles.profileTextName}>{this.props.user.match}</Text>
         </View>
         <Text style={styles.profileTextDeal}>{this.props.user.deal}</Text>
@@ -51,13 +64,22 @@ export default class UserCard extends React.Component {
           </View>
         </View>
 
+        
+        
+        {this.props.user.heroes != '' ? 
         <Text style={styles.profileTextSectionHead}>Heroes </Text>
+        : null }
         <Text>{this.props.user.heroes}</Text>
 
+        {this.props.user.influences != '' ? 
         <Text style={styles.profileTextSectionHead}>Influences </Text>
+        : null }
         <Text>{this.props.user.influences}</Text>
 
+        {this.props.user.bio != '' ? 
         <Text style={styles.profileTextSectionHead}>Bio</Text>
+        : null
+        }
         <Text>{this.props.user.bio}</Text>
        
 

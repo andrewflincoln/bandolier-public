@@ -8,7 +8,7 @@ import {SecureStore} from 'expo'
 import ProfileBar from './ProfileBar'
 import NavBar from './NavBar'
 import UserCard from './UserCard'
-import attachHeader from './Home'
+import {Font} from 'expo'
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
@@ -18,14 +18,19 @@ export default class MyProfile extends React.Component {
 
     this.state= {
       userId: 0,   //'',
-
+      fontLoaded: false,
       currentUser: {},
       
     }
   }
 
-  componentWillMount = () => {
+  componentWillMount = async () => {
     this.setState({userId: this.props.navigation.getParam('userId')})
+
+    await Font.loadAsync({
+      'belair': require('../../assets/fonts/Belair-Regular.otf')
+    })
+    this.setState({fontLoaded: true})
   }
   componentDidMount = () => {
     this.getUser()
@@ -67,7 +72,7 @@ export default class MyProfile extends React.Component {
           />
 
           <View style={styles.myProfileHeadlineView}>
-          <Text style={styles.myProfileHeadlineText}>Your Profile</Text>
+          <Text style={ {fontFamily: 'belair', fontSize: 45} }>Your Profile</Text>
           </View>
           
           <ScrollView style={styles.userCardScroll}>
@@ -78,10 +83,9 @@ export default class MyProfile extends React.Component {
                 source={{uri: user.img_url}}
                 />
               <View style={styles.nameMatchBar}>
-                <Text style={styles.profileTextName}>{user.username}</Text>
+                <Text style={{fontFamily: 'belair', fontSize: 45, marginTop: 5}}>{user.username}</Text>
     
               </View>
-              {/* <Text style={styles.profileTextSectionHead}>Deal </Text> */}
               <Text style={styles.profileTextDeal}>{user.deal}</Text>
 
             

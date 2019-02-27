@@ -15,9 +15,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#8EE8B9',
     height: '100%',
-    opacity: 0.9,
+    opacity: 0.95,
     zIndex: 1
-
   }, 
   loginForm: {
     alignSelf: 'center',
@@ -26,19 +25,19 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     zIndex: 2,
-    opacity: 1,
+    opacity: .75,
   },
   loginFormText: {
-   
     fontSize: 20,
-  
   },
   emailPasswordView: {
     marginTop: 8,
     marginBottom: 6
   },
 
-  loginButton: {
+  loginButtonsView: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     marginBottom: 8,
   },
   userCardScroll: {
@@ -60,7 +59,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 
-
   //UserCard
   profileInner: {
     alignSelf: 'center',
@@ -78,31 +76,34 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  profileTextBody: {
-    
-  },
+
   profileTextName:{
-    fontSize: 23,
-    marginTop: 1,
-    fontWeight: 'bold',
+    fontSize: 25,
+    marginTop: 5,
   },
   profileTextSectionHead: {
     fontSize: 14,
     fontWeight: 'bold',
-    marginTop: 2
+    marginTop: 4
   },
   profileTextDeal: {
     // fontSize: 18,
-    marginBottom: 2,
+    // fontStyle: 'italic'
+    marginBottom: 7,
   },
   genreInstrSection: {
     flexDirection: 'row',
-    // justifyContent: 'space-between'
+
   },
   instrCol: {
     marginLeft: 20
   },
 
+
+  bottomLine: {
+    padding: 4,
+    backgroundColor: 'black'
+  },
 
   playBar: {
     backgroundColor: 'white',
@@ -243,7 +244,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF9CC',
     width: '90%',
     marginTop: 5,
-    borderRadius: 10,
+    borderRadius: 8,
     padding: 15,
     // height: '100%'
   },
@@ -271,7 +272,8 @@ const styles = StyleSheet.create({
   createInput: {
     // height: 70,
     backgroundColor: 'white',
-    marginBottom: 8
+    marginBottom: 8,
+    paddingLeft: 8
 
   },
   genreInstrPickerView: {
@@ -376,14 +378,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     marginLeft: 5,
-    marginRight: 20,
+    marginRight: 3,
     marginTop: 5,
     backgroundColor: 'gray'
   },
   searchModifyText: {
     color: 'white',
     fontSize: 20,
-    alignSelf: 'center'
+    alignSelf: 'flex-end'
   },
   otherInput: {
     backgroundColor: 'white',
@@ -516,15 +518,14 @@ const styles = StyleSheet.create({
 
   //My Profile 
   myProfileHeadlineView: {
-    fontSize: 30,
     backgroundColor: 'white',
     width: '100%',
     marginTop: 10,
     marginLeft: 8,
-    paddingLeft: 15,
+    paddingLeft: 23,
     paddingTop: 5,
     paddingBottom: 5,
-    borderRadius: 10
+    borderRadius: 25
   },
  myProfileHeadlineText: {
     fontSize: 25,
