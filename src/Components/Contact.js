@@ -63,8 +63,8 @@ export default class Contact extends React.Component {
     .then(response => this.setState({convos: response.data}))
     .catch(() => console.log('failed to get convos'))
   }
-  goToChat = (user2) => {
-    axios.get(`${BASE_URL}/messages/${this.state.userId}/${user2}`)
+  goToChat = async (user2) => {
+    await axios.get(`${BASE_URL}/messages/${this.state.userId}/${user2}`)
     .then(response => this.setState({messages: response.data.rows, inChat: true}))
     .catch(() => console.log('failed to get messages'))
 
@@ -79,8 +79,6 @@ export default class Contact extends React.Component {
     .then(response => {
       this.setState({messages: response.data.rows, newMessage: ''})
     })
-
-    
 
   }
 
