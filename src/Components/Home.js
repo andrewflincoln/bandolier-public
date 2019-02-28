@@ -45,7 +45,7 @@ export default class Home extends React.Component {
     })
     .then( () =>  { 
         this.state.currentUser.url ? this.playUser(this.state.currentUser.url) 
-        : this.playUser(`https://s3-us-west-2.amazonaws.com/bandolier-tracks/elevator_music.mp3`) //elevator music if no track
+        : this.playUser(`https://s3-us-west-2.amazonaws.com/bandolier-tracks/elevator2.mp3`) //elevator music if no track
      } )
     .catch(() => console.log('failed to get next user') )
   }

@@ -70,14 +70,20 @@ export default class Questions extends React.Component {
             style={[this.state.answer===2 ? styles.selectedAnswer : styles.optionCard]}>
           <Text>{q.option_2}</Text>
         </TouchableOpacity>
+
+        {this.state.option_3 !='' ? 
         <TouchableOpacity onPress={() => this.setState({answer: 3})} 
             style={[this.state.answer===3 ? styles.selectedAnswer : styles.optionCard]}>
           <Text>{q.option_3}</Text>
         </TouchableOpacity>
+        : null }
+
+        {this.state.option_4 !='' ? 
         <TouchableOpacity onPress={() => this.setState({answer: 4})} 
             style={[this.state.answer===4 ? styles.selectedAnswer : styles.optionCard]}>
           <Text>{q.option_4}</Text>
         </TouchableOpacity>
+        : null}
 
         <View style={styles.questionSubmitView}>  
            <TouchableOpacity style={styles.questionSubmit} onPress={this.getNextQuestion}>
