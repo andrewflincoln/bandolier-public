@@ -2,16 +2,8 @@
 Bandolier is a mobile matchmaking app seeking to help musicians find their ideal bandmates
 
 
-
-![Radio View](./screens/Screenshot_20190225-110213.png)
-
-
-
-
-
 ## Setup
-
-To install Bandolier, download the APK at AWS DOWNLOAD LINK--------------------- or some IOS thing maybe
+This is a React Native Expo project, installable APK to come shortly.
 
 Backend is deployed at https://quiet-garden-92157.herokuapp.com
 
