@@ -32,7 +32,7 @@ export default class Contact extends React.Component {
 
   }
 
-  componentWillMount = () => {
+  UNSAFE_componentWillMount = () => {
     this.setState({userId: this.props.navigation.getParam('userId')})
   }
   componentDidMount = () => {

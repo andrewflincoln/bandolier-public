@@ -1,12 +1,12 @@
 import React from 'react'
+
 import {Text, View, ImageBackground, ScrollView} from 'react-native'
 import axios from 'axios'
 import styles from '../styles'
 import UserCard from './UserCard'
 import PlayBar from './PlayBar'
-import NavBar from './NavBar'
-
-import {Audio} from 'expo'
+import NavBar from './NavBar'//  
+import {Audio} from 'expo-av'
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
@@ -23,7 +23,7 @@ export default class Home extends React.Component {
     }
   }
 
-  componentWillMount = async () => { //sync issues here?
+  UNSAFE_componentWillMount = async () => { //sync issues here?
     this.setState({userId: this.props.navigation.getParam('userId')})
    
   }

@@ -1,7 +1,8 @@
 import React from 'react'
 import {Text, View, Image} from 'react-native'
 import styles from '../styles'
-import {Font} from 'expo'
+
+import * as Font from 'expo-font'
 
 
 export default class UserCard extends React.Component {

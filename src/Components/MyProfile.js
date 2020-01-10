@@ -8,7 +8,8 @@ import {SecureStore} from 'expo'
 import ProfileBar from './ProfileBar'
 import NavBar from './NavBar'
 import UserCard from './UserCard'
-import {Font} from 'expo'
+// import {Font} from 'expo'
+import * as Font from 'expo-font'
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
 
@@ -24,7 +25,7 @@ export default class MyProfile extends React.Component {
     }
   }
 
-  componentWillMount = async () => {
+  UNSAFE_componentWillMount = async () => {
     this.setState({userId: this.props.navigation.getParam('userId')})
 
     await Font.loadAsync({

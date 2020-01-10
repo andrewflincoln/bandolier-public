@@ -43,7 +43,7 @@ export default class Create extends React.Component {
   }
 
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (this.props.navigation.getParam('pageStatus') === 'update') {
       this.setState({pageStatus: 'update', userToUpdate: this.props.navigation.getParam('user')})
     }

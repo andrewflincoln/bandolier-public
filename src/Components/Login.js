@@ -2,8 +2,9 @@ import React from 'react'
 import {Text, TextInput, View, ImageBackground, TouchableOpacity} from 'react-native'
 import axios from 'axios'
 import styles from '../styles'
-import {SecureStore} from 'expo'
-import {Font} from 'expo'
+
+import * as SecureStore from 'expo-secure-store'
+import * as Font from 'expo-font'
 
 
 

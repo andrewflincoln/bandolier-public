@@ -17,13 +17,17 @@ export default class Questions extends React.Component {
     }
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount = async () => { //added = => async
     this.setState({userId: this.props.navigation.getParam('userId')})
     this.getNextQuestion()
   }
+  // componentDidMount = () => { //change from will
+  //   // this.setState({userId: this.props.navigation.getParam('userId')})
+  //   this.getNextQuestion()
+  // }
 
-  getNextQuestion = () =>  { //sometimes getting a 304 error here (but not on Postman)
-    axios.get(`${BASE_URL}/questions/next/${this.state.userId}`, attachHeader() )
+  getNextQuestion = async () =>  { //not async in Home.  304 sometimes?
+    axios.get(`${BASE_URL}/questions/next/${this.state.userId}`) //removed attachHeader, fixed cannot call class as function
     .then(response => {
         this.setState({currentQ: response.data})
     })
@@ -33,8 +37,9 @@ export default class Questions extends React.Component {
   }
 
   submitAnswer = () => { //this works flawlessly, including the invocation of the above function
-    axios.post(`${BASE_URL}/questions`, {userId: this.state.userId, questionId: this.state.currentQ.id, answer: this.state.answer}, attachHeader())
+    axios.post(`${BASE_URL}/questions`, {userId: this.state.userId, questionId: this.state.currentQ.id, answer: this.state.answer} ) //removed attachHeader
     .then(this.getNextQuestion())
+    .catch( () => console.log(`failed to submit`)) //
   }
 
   navGen = (toScreen) => {
@@ -71,14 +76,14 @@ export default class Questions extends React.Component {
           <Text>{q.option_2}</Text>
         </TouchableOpacity>
 
-        {this.state.option_3 !='' ? 
+        {q.option_3 !='' ? 
         <TouchableOpacity onPress={() => this.setState({answer: 3})} 
             style={[this.state.answer===3 ? styles.selectedAnswer : styles.optionCard]}>
           <Text>{q.option_3}</Text>
         </TouchableOpacity>
         : null }
 
-        {this.state.option_4 !='' ? 
+        {q.option_4 !='' ? 
         <TouchableOpacity onPress={() => this.setState({answer: 4})} 
             style={[this.state.answer===4 ? styles.selectedAnswer : styles.optionCard]}>
           <Text>{q.option_4}</Text>
@@ -88,7 +93,7 @@ export default class Questions extends React.Component {
         <View style={styles.questionSubmitView}>  
            <TouchableOpacity style={styles.questionSubmit} onPress={this.getNextQuestion}>
              <Text style={styles.answerButtonText}>
-               Skip
+               Skip 
              </Text>
            </TouchableOpacity>
 

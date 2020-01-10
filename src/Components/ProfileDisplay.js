@@ -8,7 +8,8 @@ import SearchedBar from './SearchedBar'
 import NavBar from './NavBar'
 import UserCard from './UserCard'
 
-import {Audio, Font} from 'expo'
+import {Audio} from 'expo-av'
+import * as Font from 'expo-font'
 import IconF from 'react-native-vector-icons/FontAwesome'
 
 const BASE_URL = `https://quiet-garden-92157.herokuapp.com`
@@ -28,7 +29,7 @@ export default class ProfileDisplay extends React.Component {
     }
   }
 
-  componentWillMount = async () => {
+  UNSAFE_componentWillMount = async () => {
     this.setState({userId: this.props.navigation.getParam('userId')}) //passing user id
     await Font.loadAsync({
       'belair': require('../../assets/fonts/Belair-Regular.otf')
