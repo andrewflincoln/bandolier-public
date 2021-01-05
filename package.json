@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.7.7",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "babel": "^6.23.0",
     "dev-tools": "^0.1.6",
     "expo": "^36.0.2",
