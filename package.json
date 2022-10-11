@@ -13,7 +13,7 @@
     "dev-tools": "^0.1.6",
     "expo": "^36.0.2",
     "expo-av": "~8.0.0",
-    "expo-cli": "^2.21.2",
+    "expo-cli": "^6.0.6",
     "expo-core": "^2.0.2",
     "expo-font": "~8.0.0",
     "expo-secure-store": "~8.0.0",
